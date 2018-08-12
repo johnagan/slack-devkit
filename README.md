@@ -1,7 +1,9 @@
 # Slack Development Kit
 Start building a Slack App quickly with OAuth support, url parsing, and authenticated HTTPS client to call Slack’s API. This was made to build Slack Apps on [Glitch](https://glitch.com) even faster, but it works anywhere.
 
-## Features
+## Overview
+
+### Features
 * OAuth support without 3rd-party database
 * Supports Single Channel Installations
 * Verifies request signatures and/or verification tokens
@@ -11,7 +13,7 @@ Start building a Slack App quickly with OAuth support, url parsing, and authenti
 * Authenticated HTTP client for Slack's API
 * Writeable datastore associated to the workspace
 
-## What's Included
+### What's Included
 * [App](./lib/app.js) - The Slack App
 * [Request](./lib/request.js) - The request made from Slack
 * [Client](./lib/client.js) - Minimal HTTPS client (to call other APIs)
@@ -21,12 +23,14 @@ Start building a Slack App quickly with OAuth support, url parsing, and authenti
 * [Server](./lib/server.js) - An [Express.js](https://expressjs.com/) instance with the router attached
 
 
-## Install
+## Getting Started
+
+### Install
 ```
 npm i slack-devkit
 ```
 
-## Usage
+### Usage
 ```javascript
 const Slack = require('slack-devkit')
 
@@ -62,7 +66,7 @@ server.start()
 ```
 
 
-## Configuration
+### Configuration
 The configuration options used for the constructor
 
 
