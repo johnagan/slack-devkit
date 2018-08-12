@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- "8"
+deploy:
+  tag: next
+  provider: npm
+  email: johnagan@gmail.com
+  api_key:
+    secure: XB/g4NWr73xDI8wmNmHJuqjL2cM6t1NBWgG0p6pFlmDYE5NBd8KU9YPIvHvQ5X2pC7b3jJaO547UxyeePk4JQsehp+A9hjevOG0YVl/thdhwwEjujd1aH2kFj4a1/8q7V2uPtk9MlRTE03kOn2QqMuIS+OJeufuV3H1TvIVjOHp+r5mxg6v+yNvpMyyVc1g4r2BVfUOY2sA/SWCl4x5HRhp3EPZKg/1kG/RhHkqp6tnZNXYmypPhV4oG6xF7QPmLV74I9h38xA3tsXdEpM7iaIahhYf92suowENnEaSaxF5Q5aEyK2tWITuSQYHxvYFPkS/r5A9J66vtVKqNoMV7ANVhao8bfNYAuXZq8D5c5SKqZXIbH5nEF/E6zvyGWfWFOlLJQ+ESNEo38eLmoOP0ad5rT0xWuv5X789CQHcM+GxUtueGOQxXewJdz+uuAkkSwto+cyubdFd1PFbR8EX/htkj0QAXpPkBhaLhYGT7+rXrjwFYkG39EuJI1fEJwtSY7r9tVTY52lYO7Hany6RzszPPmS9myP6MFUkIqSdZhBYol1taTgGLQdLVOhml2fY/H6yxcnG3DKDYoxpBTI6kxtPnWhQu1kgmCu1JE7vx2YJ45yslMT/C7old2SAaKxRV0XvWjnOiDIc266HB7YCaPCavju9EoLZGmbWW1t5SsfY=
+  on:
+    repo: johnagan/slack-devkit
