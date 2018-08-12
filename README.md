@@ -65,13 +65,13 @@ The configuration options used for the constructor
 
 | Name                 | Description                                         
 | -------------------- | ----------------------------------------------------
-| `client_id`          | Slack client id
-| `client_secret`      | Slack client secret
-| `signing_secret`     | Slack signing secret
-| `scope`              | Comma-delimited scopes for OAuth
-| `redirect_uri`       | Slack OAuth redirect uri
-| `verification_token` | Slack verification token
-| `access_token`       | Access token to use when not distributed
+| `client_id`          | [Slack OAuth client id](https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install)
+| `client_secret`      | [Slack OAuth client secret](https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install)
+| `scope`              | [Slack OAuth scopes](https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install)
+| `redirect_uri`       | [Slack OAuth redirect uri](https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install)
+| `signing_secret`     | [Slack signing secret](https://api.slack.com/docs/verifying-requests-from-slack#about)
+| `verification_token` | [Slack verification token](https://api.slack.com/events-api#url_verification)
+| `access_token`       | Access token for [internal integrations](https://api.slack.com/slack-apps#internal_integrations)
 | `slack_root`         | Root domain to use for Slack requests
 | `subdomain`          | Subdomain to use when hosting with [localtunnel.js](https://github.com/localtunnel/localtunnel)
 | `datastore`          | File path to write to or a DataStore object
