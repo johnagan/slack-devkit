@@ -38,4 +38,4 @@ server.post('/slash-command', (req, res) => {
 
 
 // Start webserver
-server.start()
+server.start(PORT)
