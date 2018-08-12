@@ -36,4 +36,4 @@ server.post('/events-api', (req, res) => {
 
 
 // Start webserver
-server.start()
+server.start(PORT)
