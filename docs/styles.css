@@ -53,11 +53,11 @@ a:hover {
   text-decoration: underline;
 }
 
-a.download {
+a.bigbutton {
   text-decoration: none;
   display: block;
   color: white;
-  margin: 20px auto 0;
+  margin: 30px auto 0;
   width: 300px;
   height: 45px;
   line-height: 45px;
@@ -86,7 +86,7 @@ a.download-runtime {
   text-align: center;
 }
 
-a.more-info {
+a.smallbutton {
   padding-top: 8px;
   padding-bottom: 8px;
   text-decoration: none;
@@ -110,7 +110,7 @@ a.more-info {
   border-radius: 5px;
 }
 
-a.more-info:hover {
+a.smallbutton:hover {
   background-color: #021B79;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #205E9B), color-stop(100%, #021B79));
   background-image: -webkit-linear-gradient(#205E9B, #021B79);
