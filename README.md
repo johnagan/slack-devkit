@@ -64,18 +64,18 @@ server.start()
 The configuration options used for the constructor
 
 
-| Name                 | Description                                         
-| -------------------- | ----------------------------------------------------
-| `client_id`          | [Slack OAuth client id](https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install)
-| `client_secret`      | [Slack OAuth client secret](https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install)
-| `scope`              | [Slack OAuth scopes](https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install)
-| `redirect_uri`       | [Slack OAuth redirect uri](https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install)
-| `signing_secret`     | [Slack signing secret](https://api.slack.com/docs/verifying-requests-from-slack#about)
-| `verification_token` | [Slack verification token](https://api.slack.com/events-api#url_verification)
-| `access_token`       | Access token for [internal integrations](https://api.slack.com/slack-apps#internal_integrations)
-| `slack_root`         | Root domain to use for Slack requests
-| `subdomain`          | Subdomain to use when hosting with [localtunnel.js](https://github.com/localtunnel/localtunnel)
-| `datastore`          | File path to write to or a DataStore object
+| Name                 | Type     | Description                                         
+| -------------------- | -------- | ----------------------------------------------------
+| `scope`              | Required | [Slack OAuth scopes](https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install)
+| `client_id`          | Required | [Slack OAuth client id](https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install)
+| `client_secret`      | Required | [Slack OAuth client secret](https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install)
+| `redirect_uri`       | Optional | [Slack OAuth redirect uri](https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install)
+| `signing_secret`     | Optional | [Slack signing secret](https://api.slack.com/docs/verifying-requests-from-slack#about)
+| `verification_token` | Optional | [Slack verification token](https://api.slack.com/events-api#url_verification)
+| `access_token`       | Optional | Access token for [internal integrations](https://api.slack.com/slack-apps#internal_integrations)
+| `slack_root`         | Optional | Root domain to use for Slack requests
+| `subdomain`          | Optional | Subdomain to use when hosting with [localtunnel.js](https://github.com/localtunnel/localtunnel)
+| `datastore`          | Optional | File path to write to or a DataStore object
 
 
 ## Slack Request
