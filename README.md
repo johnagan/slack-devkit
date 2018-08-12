@@ -11,6 +11,15 @@ Start building a Slack App quickly with OAuth support, url parsing, and authenti
 * Authenticated HTTP client for Slack's API
 * Writeable datastore associated to the workspace
 
+## What's Included
+* [App](./lib/app.js) - The Slack App
+* [Request](./lib/request.js) - The request made from Slack
+* [Client](./lib/client.js) - Minimal HTTPS client (to call other APIs)
+* [Payload](./lib/payload.js) - Wrapper for Slack payloads (to standardize attributes)
+* [FileStore](./lib/filestore.js) - File-based storage to save workspace information to
+* [Router](./lib/router.js) - An [Express.js](https://expressjs.com/) router (middleware)
+* [Server](./lib/server.js) - An [Express.js](https://expressjs.com/) instance with the router attached
+
 
 ## Install
 ```
