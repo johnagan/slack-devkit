@@ -13,6 +13,16 @@ Start building a Slack App quickly with OAuth support, url parsing, and authenti
 * Authenticated HTTP client for Slack's API
 * Writeable datastore associated to the workspace
 
+### Examples
+| File | Description                                         
+| ------------------------------------- | ----------------------------------------------------
+| [features.js](./examples/features.js) | Examples of some common Slack App features
+| [internal-integration.js](./examples/internal-integration.js) | Example configuration of an [internal integrations](https://api.slack.com/slack-apps#internal_integrations)
+| [storing-data.js](./examples/storing-data.js) | Example of storing and retrieving data from the datastore
+| [express.js](./examples/express.js) | Example of adding Slack DevKit to an exiting [Express.js](https://expressjs.com/) server
+
+
+
 ### What's Included
 * [App](./lib/app.js) - The Slack App
 * [Request](./lib/request.js) - The request made from Slack
