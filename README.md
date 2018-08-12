@@ -62,16 +62,19 @@ server.start()
 ## Configuration
 The configuration options used for the constructor
 
-- `scope` - A comma-delimited scopes for Slack OAuth
-- `client_id` - The Slack App client id
-- `client_secret` - The Slack App client secret
-- `signing_secret` - The Slack App signing secret
-- `redirect_uri` - The Slack App OAuth redirect uri
-- `verification_token` - Slack App verification token
-- `access_token` - Access token to use when the App is not distributed (optional)
-- `datastore` - A file name to write workspace info to or pass in an object to use an alternate datastore (optional)
-- `subdomain` - The subdomain to use when hosting with [localtunnel.js](https://github.com/localtunnel/localtunnel)
-- `slack_root` - The root domain to make Slack requests to (optional)
+
+| Name               | Type      | Description                                         
+| ------------------ | --------- | ----------------------------------------------------
+| client_id          | `string`  | Slack client id
+| client_secret      | `string`  | Slack client secret
+| signing_secret     | `string`  | Slack signing secret
+| scope              | `string`  | Comma-delimited scopes for OAuth
+| redirect_uri       | `string`  | Slack OAuth redirect uri
+| verification_token | `string`  | Slack verification token
+| access_token       | `string`  | Access token to use when not distributed
+| slack_root         | `string`  | Root domain to use for Slack requests
+| subdomain          | `string`  | Subdomain to use when hosting with [localtunnel.js](https://github.com/localtunnel/localtunnel)
+| datastore          | `string` or `object`  | File path to write to or a DataStore object
 
 
 ## Slack Request
