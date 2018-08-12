@@ -63,18 +63,18 @@ server.start()
 The configuration options used for the constructor
 
 
-| Name               | Description                                         
-| ------------------ | ----------------------------------------------------
-| client_id          | Slack client id
-| client_secret      | Slack client secret
-| signing_secret     | Slack signing secret
-| scope              | Comma-delimited scopes for OAuth
-| redirect_uri       | Slack OAuth redirect uri
-| verification_token | Slack verification token
-| access_token       | Access token to use when not distributed
-| slack_root         | Root domain to use for Slack requests
-| subdomain          | Subdomain to use when hosting with [localtunnel.js](https://github.com/localtunnel/localtunnel)
-| datastore          | File path to write to or a DataStore object
+| Name                 | Description                                         
+| -------------------- | ----------------------------------------------------
+| `client_id`          | Slack client id
+| `client_secret`      | Slack client secret
+| `signing_secret`     | Slack signing secret
+| `scope`              | Comma-delimited scopes for OAuth
+| `redirect_uri`       | Slack OAuth redirect uri
+| `verification_token` | Slack verification token
+| `access_token`       | Access token to use when not distributed
+| `slack_root`         | Root domain to use for Slack requests
+| `subdomain`          | Subdomain to use when hosting with [localtunnel.js](https://github.com/localtunnel/localtunnel)
+| `datastore`          | File path to write to or a DataStore object
 
 
 ## Slack Request
