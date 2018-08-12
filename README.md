@@ -46,12 +46,11 @@ const Slack = require('slack-devkit')
 // Configure express with the Slack App settings
 const { server } = new Slack({
   scope: 'chat:write,bot',
-  client_id: "XXXXXXXXXXXXXXXXXXXXX",
-  client_secret: "XXXXXXXXXXXXXXXXX",
-  signing_secret: "XXXXXXXXXXXXXXXX",
-  verification_token: "XXXXXXXXXXXX", // optional
-  redirect_uri: 'XXXXXXXXXXXXX',      // optional
-  datastore: '.data/workspaces'       // optional
+  client_id: "1212313.1231231231231",
+  client_secret: "12312312323123123",
+  signing_secret: "sdfsadfsadfasdfas",
+  redirect_uri: "https://myserver.com", // optional
+  datastore: ".data/workspaces"         // optional
 })
 
 // All GET routes redirect to the “Add to Slack” OAuth flow
@@ -70,8 +69,8 @@ server.post('/', (req, res) => {
   res.send()
 })
 
-// Start the webserver
-server.start()
+// Start the webserver on port 3000
+server.start(3000)
 ```
 
 
