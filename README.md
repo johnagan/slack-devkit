@@ -94,5 +94,4 @@ The configuration options used for the constructor
 | `verification_token` | Optional | [Slack verification token](https://api.slack.com/events-api#url_verification)
 | `access_token`       | Optional | Access token for [internal integrations](https://api.slack.com/slack-apps#internal_integrations)
 | `slack_root`         | Optional | Root domain to use for Slack requests
-| `subdomain`          | Optional | Subdomain to use when hosting with [localtunnel.js](https://github.com/localtunnel/localtunnel)
 | `datastore`          | Optional | File path to write to or a DataStore object
