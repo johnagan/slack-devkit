@@ -8,7 +8,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css">
-  <link href="https://slackdevkit.com/images/favicon.png" rel="shortcut icon" type="image/png">
+  <link href="favicon.png" rel="shortcut icon" type="image/png">
   <link href="styles.css" media="all" rel="stylesheet" type="text/css">
   <link href="theme.css" media="all" rel="stylesheet" type="text/css">
 
@@ -39,9 +39,9 @@
         </p>
       </section>
 
-      <!-- FEATURES -->
-      <section name="features">
-        <h2>Features</h2>
+      <!-- HIGHLIGHTS -->
+      <section name="highlights">
+        <h2>Highlights</h2>
         <a href="https://api.slack.com/slack-apps" target="_blank" id="slack-sticker">
           <img src="//a.slack-edge.com/bfaba/img/api/homepage_slack_apps-2x.png"/>
         </a>
@@ -78,10 +78,11 @@
           </div>
           <pre><code class="javascript">const { server, router, client, app } = new Slack(settings)</code></pre>
         </div>
+      </section>
 
-        <h2 id="getting-started">
-          Settings
-        </h2>
+      <!-- SETTINGS -->
+      <section name="settings">
+        <h2 id="getting-started">Settings</h2>
         <div class="content">
           <div class="bullet">
             <div class="description">
@@ -175,6 +176,68 @@
             </div>
           </div>
         </div>
+      </section>
+
+      <!-- REQUESTS -->
+      <section name="requests">
+        <h2 id="getting-started">Requests</h2>
+        <div class="content">
+
+          <div class="bullet">
+            <div class="description">
+              The <a href="https://github.com/johnagan/slack-devkit/blob/master/lib/request.js" target="_blank">Slack Request</a> is populated on all incoming POST requests and will be attached to the Express.js request object. All helper methods on
+              <a href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js" target="_blank">Payload</a> can also be called from the Request.
+            </div>
+            <pre><code class="javascript">server.on('/', (req, res) => {
+  req.slack // this is the Slack Request object
+})</code></pre>
+          </div>
+
+          <div class="bullet">
+            <div class="description">
+              <b>Slack API</b><br>Make authenticated calls to the Slack API by calling the <code>api</code> method on requests.
+            </div>
+            <pre><code class="javascript">req.slack.api('users.info', { user: 'U12345').then(r => {
+  r.data // the api results
+})</code></pre>
+          </div>
+
+          <div class="bullet">
+            <div class="description">
+              <b>Replies</b><br>Reply to any message by calling the <code>reply</code> method and pass in the <a href="https://api.slack.com/docs/message-attachments" target="_blank">message</a> to reply with.
+            </div>
+            <pre><code class="javascript">req.slack.reply({
+  text: 'This is a reply!',
+  attachments: [{
+    text: 'boom!'
+  }]
+})</code></pre>
+          </div>
+
+          <div class="bullet">
+            <div class="description">
+              <b>Unfurls</b><br>Respond to <code>link_shared</code> events and unfurl them with <code>unfurl</code>.
+            </div>
+            <pre><code class="javascript">req.slack.unfurl({
+  title: 'Unfurled Link',
+  image_url: 'https://home.com/image.png'
+})</code></pre>
+          </div>
+
+          <div class="bullet">
+            <div class="description">
+              <b>Uploads</b><br>Respond to events with a file by calling <code>upload</code> and pass in <a href="https://api.slack.com/methods/files.upload" target="_blank">files.upload</a> arguments.
+            </div>
+            <pre><code class="javascript">req.slack.upload({
+  filename: 'some_file.png', 
+  file: fileBuffer 
+})</code></pre>
+          </div>
+
+          <ul class="bullet">
+            <a class="smallbutton" href="https://github.com/johnagan/slack-devkit/blob/master/lib/request.js" target="_blank">More on Requests</a>
+            <a class="smallbutton" href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js" target="_blank">More on Payloads</a>
+          </ul>
       </section>
 
       <!-- DATASTORE -->
@@ -339,6 +402,7 @@ server.start(3000)</code></pre>
         </div>
       </section>
 
+      <!-- FOOTER -->
       <section name="footer">
         <a class="issue-tracker" href="https://github.com/johnagan/slack-devkit/issues">
           Found a documentation issue? Tell us!
@@ -349,7 +413,7 @@ server.start(3000)</code></pre>
     <a href="http://github.com/johnagan/slack-devkit/" target="_blank" id="github">
       <img alt="Fork me on GitHub" src="forkme.png">
     </a>
-  </div>
+    </div>
 </body>
 
 </html>
