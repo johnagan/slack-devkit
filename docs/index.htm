@@ -175,6 +175,35 @@
         </div>
       </section>
 
+      <!-- SERVER -->
+      <section name="server">
+        <h2 id="getting-started">Server</h2>
+        <div class="content">
+
+          <div class="bullet">
+            <div class="description">
+              The <a href="https://github.com/johnagan/slack-devkit/blob/master/lib/server.js" target="_blank">Slack Server</a> is a preconfigured Express.js instance with the <a href="https://github.com/johnagan/slack-devkit/blob/master/lib/router.js"
+                target="_blank">Router</a> already attached.
+            </div>
+            <pre><code class="javascript">const { server } = new Slack(settings)
+...// routing stuff
+server.start(3000) // optionally pass in the port number to listen on
+</code></pre>
+          </div>
+
+          <div class="bullet">
+            <div class="description">
+              The server is preconfigured to use <a href="https://github.com/localtunnel/localtunnel" target="_blank">LocalTunnel</a> if you've installed the module (it's not preloaded).
+            </div>
+            <pre><code class="javascript">const localtunnel = require('localtunnel')
+const { server } = new Slack(settings)
+...// routing stuff
+server.startLocal('slackdevkit') // optionally pass in the subdomain to use (xxxx.localtunnel.me)
+</code></pre>
+          </div>
+        </div>
+      </section>
+
       <!-- REQUESTS -->
       <section name="requests">
         <h2 id="getting-started">Requests</h2>
