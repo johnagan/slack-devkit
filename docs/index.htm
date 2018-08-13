@@ -187,7 +187,10 @@
             </div>
             <pre><code class="javascript">const { server } = new Slack(settings)
 ...// routing stuff
-server.start(3000) // optionally pass in the port number to listen on
+
+// optionally pass in the port number to listen on
+// server will be listening on localhost:3000
+server.start(3000)
 </code></pre>
           </div>
 
@@ -195,10 +198,12 @@ server.start(3000) // optionally pass in the port number to listen on
             <div class="description">
               The server is preconfigured to use <a href="https://github.com/localtunnel/localtunnel" target="_blank">LocalTunnel</a> if you've installed the module (it's not preloaded).
             </div>
-            <pre><code class="javascript">const localtunnel = require('localtunnel')
-const { server } = new Slack(settings)
+            <pre><code class="javascript">const { server } = new Slack(settings)
 ...// routing stuff
-server.startLocal('slackdevkit') // optionally pass in the subdomain to use (xxxx.localtunnel.me)
+
+// optionally pass in the subdomain to use (xxxx.localtunnel.me)
+// server will be listening on slackdevkit.localtunnel.me
+server.startLocal('slackdevkit')
 </code></pre>
           </div>
         </div>
