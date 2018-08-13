@@ -5,7 +5,7 @@ Slack DevKit is a light-weight developer kit to build [Slack Apps](https://api.s
 
 This was made to build Slack Apps on [Glitch](https://glitch.com) even faster, but it works everywhere!
 
-[![](https://cl.ly/0f19230N353K/Screen%20Shot%202018-08-12%20at%205.20.28%20PM.png)](https://slackdevkit.com/)
+Learn more on [SlackDevKit.com](https://slackdevkit.com)
 
 ## Overview
 
