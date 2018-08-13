@@ -1,0 +1,568 @@
+doctype html
+head
+  meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+  meta(property='og:title' content='Slack DevKit')
+  meta(property='og:description' content='Slack DevKit is a light-weight developer kit to build Slack Apps in node.js super fast. No previous\
+  knowledge about building Slack Apps or Bots needed. Plus, automatic support for verifying requests from Slack and responding to validations.')
+  
+  title Slack DevKit: A light-weight developer kit to Build Slack Apps in node.js
+
+  link(rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css')
+  link(href='styles.css' media='all' rel='stylesheet' type='text/css')
+  link(href='favicon.png' rel='shortcut icon' type='image/png')
+
+  script(src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js')
+  script.
+    hljs.initHighlightingOnLoad();
+
+#body
+  #header
+    a(href='https://slackdevkit.com/')
+      img(alt='Slack DevKit: A light-weight developer kit to Build Slack Apps in node.js' src='logo.png')
+  article#contents
+    
+    // INTRODUCTION
+    section#intro(name='intro')
+      p
+        a(href='http://github.com/johnagan/slack-devkit/' target='_blank') Slack DevKit
+        |  is a light-weight developer kit to build 
+        a(href='https://api.slack.com/slack-apps' target='_blank') Slack Apps
+        |  in node.js 
+        b super fast
+        | . No previous knowledge about building Slack Apps or Bots needed. Plus, automatic support for verifying requests from Slack and responding to validations.
+      p
+        | This was made to build Slack Apps on 
+        a(href='https://glitch.com' target='_blank') Glitch
+        |  even faster, but it works everywhere!
+    
+    // HIGHLIGHTS
+    section(name='highlights')
+      h2 Highlights
+      a#slack-sticker(href='https://api.slack.com/slack-apps' target='_blank')
+        img(src='//a.slack-edge.com/bfaba/img/api/homepage_slack_apps-2x.png')
+      ul
+        li
+          a(href='https://api.slack.com/docs/oauth' target='_blank') OAuth
+          |  support without 3rd-party database
+        li
+          | Verifies 
+          a(href='https://api.slack.com/docs/verifying-requests-from-slack' target='_blank') request signatures
+          |  and/or 
+          a(href='https://api.slack.com/events-api#url_verification' target='_blank') verification tokens
+        li Support for short-lived tokens with automatic refresh
+        li Automatic retrieval of workspace&apos;s authentication info
+        li Auto-parsing of string-encoded JSON payloads
+        li Authenticated HTTPS client for Slack&apos;s API
+        li Writeable datastore associated to each workspace
+        li Automatic Slack payload normalization
+        li Auto validates Events API challenges
+        li Supports Single Channel Installations
+        li
+          | Only one dependency: 
+          a(href='https://expressjs.com' target='_blank') express.js
+      a.bigbutton(target='_blank' href='https://github.com/johnagan/slack-devkit/tree/master/examples') View Examples
+    
+    // INSTALLATION
+    section(name='install')
+      h2 Installation
+      .bullet
+        .description
+          | Slack DevKit can be installed using 
+          a(href='https://docs.npmjs.com/' target='_blank') NPM
+          | .
+        pre
+          code.shell.
+            npm i slack-devkit
+        .notes Once installed, you would require the package in your code.
+        pre
+          code.javascript.
+            const Slack = require('slack-devkit')
+        .notes Creating new instances of Slack DevKit return four objects that can be used as needed.
+        pre
+          code.javascript.
+            const { server, router, client, app } = new Slack(settings)
+          
+    // SETTINGS
+    section(name='settings')
+      h2#getting-started Settings
+      .content
+        .bullet
+          .description
+            b Single Workspace Apps
+            br
+            |  Apps that are only used in one workspace, also known as 
+            a(href='https://api.slack.com/slack-apps#internal_integrations' target='_blank') Internal Integrations
+            | , simply require a 
+            a(href='https://api.slack.com/docs/token-types' target='_blank')
+              | Slack
+              | Access Token
+            |  and a way to 
+            a(href='https://api.slack.com/docs/verifying-requests-from-slack' target='_blank') verify the request originated from Slack
+            | .
+          pre
+            code.javascript.
+              new Slack({
+                access_token: "xoxa-XXXXXXXXXXXXX",
+                signing_secret: "XXXXXXXXXXXXXXXX"
+              })
+            
+        .bullet
+          .description
+            b Multi-Workspace Apps
+            br
+            | Apps that have 
+            a(href='https://api.slack.com/slack-apps#distribute' target='_blank') distribution
+            |  enabled require 
+            a(href='https://api.slack.com/docs/oauth' target='_blank') OAuth settings
+            |  to be installed.
+          pre
+            code.javascript.
+              new Slack({
+                scope: 'commands,files:write,links:read,links:write',
+                client_id: "1212313.1231231231231",
+                client_secret: "12312312323123123",
+                signing_secret: "sdfsadfsadfasdfas"
+              })
+            
+        .bullet.shade
+          .description
+            | Here&apos;s a list of all possible settings that can be used to configure Slack DevKit.
+            br
+            table
+              thead
+                tr
+                  th Property
+                  th Description
+              tbody
+                tr
+                  td
+                    code scope
+                  td
+                    a(href='https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install' target='_blank') Slack OAuth scopes
+                tr
+                  td
+                    code client_id
+                  td
+                    a(href='https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install' target='_blank') Slack OAuth client id
+                tr
+                  td
+                    code client_secret
+                  td
+                    a(href='https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install' target='_blank') Slack OAuth client secret
+                tr
+                  td
+                    code redirect_uri
+                  td
+                    a(href='https://api.slack.com/docs/oauth#step_1_-_sending_users_to_authorize_and_or_install' target='_blank') Slack OAuth redirect uri
+                tr
+                  td
+                    code signing_secret
+                  td
+                    a(href='https://api.slack.com/docs/verifying-requests-from-slack' target='_blank') Slack signing secret
+                tr
+                  td
+                    code verification_token
+                  td
+                    a(href='https://api.slack.com/events-api#url_verification' target='_blank') Slack verification token
+                tr
+                  td
+                    code access_token
+                  td
+                    | Access token to use for 
+                    a(href='https://api.slack.com/slack-apps#internal_integrations' target='_blank') Internal Integrations
+                tr
+                  td
+                    code datastore
+                  td
+                    | A file path to write the datastore to or pass in an object to use an alternate datastore
+                tr
+                  td
+                    code slack_root
+                  td The root domain to make Slack requests to
+            .notes
+              i All arguments are optional, but may be required based on the App type.
+    
+    // SERVER
+    section(name='server')
+      h2#getting-started Server
+      .content
+        .bullet
+          .description
+            b Local Host
+            br
+            | The 
+            a(href='https://github.com/johnagan/slack-devkit/blob/master/lib/server.js' target='_blank') Slack Server
+            |  is a preconfigured Express.js instance with the 
+            a(href='https://github.com/johnagan/slack-devkit/blob/master/lib/router.js' target='_blank') Router
+            |  already attached.
+          pre
+            code.javascript.
+              const { server } = new Slack(settings)
+              ...// routing stuff
+
+              // optionally pass in the port number to listen on
+              // server will be listening on localhost:3000
+              server.start(3000)
+            
+        .bullet
+          .description
+            b LocalTunnel
+            br
+            | The server is preconfigured to use 
+            a(href='https://github.com/localtunnel/localtunnel' target='_blank') LocalTunnel
+            |  if you&apos;ve installed the module (it&apos;s not preloaded).
+          pre
+            code.javascript.
+              const { server } = new Slack(settings)
+              ...// routing stuff
+
+              // optionally pass in the subdomain to use (xxxx.localtunnel.me)
+              // server will be listening on slackdevkit.localtunnel.me
+              server.startLocal('slackdevkit')
+
+    // REQUESTS
+    section(name='requests')
+      h2#getting-started Requests
+      .content
+        .bullet
+          .description
+            | The 
+            a(href='https://github.com/johnagan/slack-devkit/blob/master/lib/request.js' target='_blank') Slack Request
+            |  is populated on all incoming POST requests and will be attached to the Express.js request object. All helper methods on
+            a(href='https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js' target='_blank') Payload
+            |  can also be called from the Request.
+          pre
+            code.javascript.
+              server.on('/', (req, res) => {
+                req.slack // this is the Slack Request object
+              })
+            
+        .bullet
+          .description
+            b Slack API
+            br
+            | Make authenticated calls to the Slack API by calling the 
+            code api
+            |  method on requests.
+          pre
+            code.javascript.
+              req.slack.api('users.info', { user: 'U12345').then(r => {
+                r.data // the api results
+              })
+            
+        .bullet
+          .description
+            b Replies
+            br
+            | Reply to any message by calling the 
+            code reply
+            |  method and pass in the 
+            a(href='https://api.slack.com/docs/message-attachments' target='_blank') message
+            |  to reply with.
+          pre
+            code.javascript.
+              req.slack.reply({
+                text: 'This is a reply!',
+                attachments: [{
+                  text: 'boom!'
+                }]
+              })
+            
+        .bullet
+          .description
+            b Unfurls
+            br
+            | Respond to 
+            code link_shared
+            |  events and unfurl them with 
+            code unfurl
+            | .
+          pre
+            code.javascript.
+              req.slack.unfurl({
+                title: 'Unfurled Link',
+                image_url: 'https://home.com/image.png'
+              })
+            
+        .bullet
+          .description
+            b Uploads
+            br
+            | Respond to events with a file by calling 
+            code upload
+            |  and pass in 
+            a(href='https://api.slack.com/methods/files.upload' target='_blank') files.upload
+            |  arguments.
+          pre
+            code.javascript.
+              req.slack.upload({
+                filename: 'some_file.png', 
+                file: fileBuffer 
+              })
+
+
+        .bullet.shade
+          .description
+            | A few more payload helper methods that are used on request:
+            br
+            table
+              thead
+                tr
+                  th Properties
+                  th Description
+              tbody
+                tr
+                  td
+                    code action
+                  td Interactive message's selected action
+                tr
+                  td
+                    code selection
+                  td The message's selected option
+                tr
+                  td
+                    code text
+                  td The message text
+                tr
+                  td
+                    code bot_id
+                  td The bot id the payload was sent from (if applicable)
+                tr
+                  td
+                    code channel_id
+                  td The channel id the payload was sent from
+                tr
+                  td
+                    code team_id
+                  td The team id the payload was sent from
+                tr
+                  td
+                    code user_id
+                  td The user id that sent the payload
+                tr
+                  td
+                    code event_types
+                  td Event types that triggered this payload
+            
+            table
+              thead
+                tr
+                  th Methods
+                  th Description
+              tbody
+                tr
+                  td
+                    code subcommand(name)
+                  td The sub-command arguments for a command
+                tr
+                  td
+                    code isSubCommand(name)
+                  td Check if the a slash command contains a sub-command
+                tr
+                  td
+                    code match(regex)
+                  td Match the message text against a regex
+                tr
+                  td
+                    code is(event_type)
+                  td Check if the payload is a type of event
+
+        ul.bullet
+          a.smallbutton(href='https://github.com/johnagan/slack-devkit/blob/master/lib/request.js' target='_blank') More on Requests
+          a.smallbutton(href='https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js' target='_blank') More on Payloads
+    // DATASTORE
+    section(name='datastore')
+      h2 DataStore
+      .bullet
+        .description
+          b Usage
+          br
+          | All requests from Slack come with a 
+          code data
+          |  object that contains authentication information about the workspace and any additional information you would like to save. This object gets populated after 
+          a(href='https://api.slack.com/docs/oauth' target='_blank') OAuth
+          |  has been successful.
+        pre
+          code.javascript.
+            server.post('/', (req, res) => {
+              // The DataStore associated with the calling workspace
+              req.slack.data 
+
+              // The OAuth access information for the workspace is available here
+              const { access_token, team_id } = req.slack.data
+
+              // Set custom data key/values
+              req.slack.set('whatever_you_want', { isCool: true })
+
+              // Get the custom data
+              req.slack.get('whatever_you_want')
+              
+              // access the object directly
+              req.slack.data.whatever_you_want
+
+              // update the whole thing - be careful though :)
+              const data = Object.assign({}, data, { isCool: true })
+              req.slack.update(data)
+            })
+          
+      .bullet
+        .description
+          b Custom Path
+          br
+          | The default DataStore is JSON and written to file at 
+          code .data/workspaces
+          | . You can change this by passing in a new path to the 
+          code datastore
+          |  setting.
+        pre
+          code.javascript.
+            new Slack({
+              scope: 'commands,files:write,links:read,links:write',
+              client_id: "1212313.1231231231231",
+              client_secret: "12312312323123123",
+              signing_secret: "sdfsadfsadfasdfas",
+              datastore: 'data/all-my-dataz.json'
+            })
+
+      .bullet
+        .description
+          b Custom DataStore
+          br
+          | If you want something a little more powerful than a filestore, you can pass in your own custom DataStore object to 
+          code datastore
+          |  and Slack DevKit will attempt to use that instead.
+        pre
+          code.javascript.
+            class CustomDataStore {
+              constructor() {
+                this.data = {}
+              }
+
+              get(id) {
+                return Promise.resolve(this.data[id])
+              }
+              
+              save(id, record) {
+                this.data[id] = record
+                return Promise.resolve(this.data[id])
+              }
+
+              update(id, record) {
+                Object.assign(this.data[id], record)
+                return Promise.resolve(this.data[id])
+              }
+            }
+
+            new Slack({
+              scope: 'commands,files:write,links:read,links:write',
+              client_id: "1212313.1231231231231",
+              client_secret: "12312312323123123",
+              signing_secret: "sdfsadfsadfasdfas",
+              datastore: new CustomDataStore()
+            })
+          
+    // SAMPLE
+    section(name='sample')
+      h2
+        | Sample Application
+      .bullet
+        .description
+          | Here&apos;s a sample application using some commonly used Slack features
+        pre
+          code.javascript.
+            const Slack = require('slack-devkit')
+
+            // Configure express with the Slack App settings
+            const { server, client } = new Slack({
+              scope: 'commands,files:write,links:read,links:write',
+              client_id: "1212313.1231231231231",
+              client_secret: "12312312323123123",
+              signing_secret: "sdfsadfsadfasdfas"
+            })
+
+            // All GET routes redirect to the “Add to Slack” OAuth flow
+            server.get('/', (req, res) => {
+              // the req.slack object contains information about the request
+              // and the workspace's authentication information
+              const { data, app_url } = req.slack
+
+              // Make an authenticated request to the Slack API
+              req.slack.api('chat.postMessage', {
+                channel: data.installer_user.app_home,
+                text: 'Thanks for installing me :bow:'
+              })
+
+              // open the Slack client to the App Home
+              res.redirect(app_url)
+            })
+
+            // Slash Command and Events API routes automatically load the
+            // workspace info and related datastore
+            server.post('/slash-command', (req, res) => {
+              // check if a sub-command was sent
+              const isUpload = req.slack.isSubCommand('upload')
+              
+              // test the message text with regex
+              const containsUrl = req.slack.match(/https?:\/\//i)
+
+              // use the included client to call other APIs or
+              // to load information from other sites
+              if (isUpload && containsUrl) {
+                // get the arguments from a sub-command
+                const fileUrl = req.slack.subcommand('upload')
+                client.get(fileUrl).then(r => {
+                  const file = Buffer.from(r.data, 'utf8')
+                  
+                  // one-line of code to respond to slash commands with a file
+                  req.slack.upload({ filename: 'logo.png', file })
+                })
+              }
+
+              res.send()
+            })
+
+
+            // All POST routes expect Slack callback events
+            // and verify against the verification token
+            server.post('/', (req, res) => {
+              // check the event type with is()  
+              const isUnfurl = req.slack.is('link_shared')
+              const isMessage = req.slack.is('message.app_home')
+              
+              // respond with an unfurl easily
+              if (isUnfurl) {
+                req.slack.unfurl({ 
+                  text: "A successful unfurl!", 
+                  image_url: "https://image.com" 
+                })
+              }
+
+              // reply to messages everywhere
+              if (isMessage) {
+                req.slack.reply({ 
+                  text: "Hey! I got your message :sunglasses:"
+                })
+              }
+
+              res.send()
+            })
+
+            // Start the webserver on port 3000
+            server.start(3000)
+
+          
+    // FOOTER
+    section(name='footer')
+      a.issue-tracker(href='https://github.com/johnagan/slack-devkit/issues')
+        | Found a documentation issue? Tell us!
+
+  a#github(href='http://github.com/johnagan/slack-devkit/' target='_blank')
+    img(alt='Fork me on GitHub' src='forkme.png')
+
+// Global site tag (gtag.js) - Google Analytics
+script(async='' src='https://www.googletagmanager.com/gtag/js?id=UA-7259055-6')
+script.
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-7259055-6');

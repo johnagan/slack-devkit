@@ -535,19 +535,3 @@ td {
 #slack-sticker img {
   height: 160px;
 }
-code.hljs {
-  background-color: #000000;
-  color: #F8F8F8;
-}
-
-.hljs-attr {
-  color: #89BDFF;
-}
-
-.hljs-keyword {
-  color: #99CF50;
-}
-
-.hljs-string {
-  color: #65B042;
-}
