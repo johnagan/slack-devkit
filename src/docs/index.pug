@@ -1,11 +1,10 @@
 doctype html
 head
   meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
-  meta(property='og:title' content='Slack DevKit')
-  meta(property='og:description' content='Slack DevKit is a light-weight developer kit to build Slack Apps in node.js super fast. No previous\
-  knowledge about building Slack Apps or Bots needed. Plus, automatic support for verifying requests from Slack and responding to validations.')
+  meta(property='og:title' content=name)
+  meta(property='og:description' content=description)
   
-  title Slack DevKit: A light-weight developer kit to Build Slack Apps in node.js
+  title= title
 
   link(rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css')
   link(href='styles.css' media='all' rel='stylesheet' type='text/css')
@@ -18,7 +17,7 @@ head
 #body
   #header
     a(href='https://slackdevkit.com/')
-      img(alt='Slack DevKit: A light-weight developer kit to Build Slack Apps in node.js' src='logo.png')
+      img(alt=title src='logo.png')
   article#contents
     
     // INTRODUCTION
@@ -29,7 +28,7 @@ head
         a(href='https://api.slack.com/slack-apps' target='_blank') Slack Apps
         |  in node.js 
         b super fast
-        | . No previous knowledge about building Slack Apps or Bots needed. Plus, automatic support for verifying requests from Slack and responding to validations.
+        | . No previous knowledge about building Slack Apps or Bots needed. Also includes automatic support for verifying requests from Slack and responding to validations.
       p
         | This was made to build Slack Apps on 
         a(href='https://glitch.com' target='_blank') Glitch
@@ -50,9 +49,9 @@ head
           |  and/or 
           a(href='https://api.slack.com/events-api#url_verification' target='_blank') verification tokens
         li Support for short-lived tokens with automatic refresh
-        li Automatic retrieval of workspace&apos;s authentication info
+        li Automatic retrieval of workspace's authentication info
         li Auto-parsing of string-encoded JSON payloads
-        li Authenticated HTTPS client for Slack&apos;s API
+        li Authenticated HTTPS client for Slack's API
         li Writeable datastore associated to each workspace
         li Automatic Slack payload normalization
         li Auto validates Events API challenges
@@ -68,7 +67,7 @@ head
       .bullet
         .description
           | Slack DevKit can be installed using 
-          a(href='https://docs.npmjs.com/' target='_blank') NPM
+          a(href='https://docs.npmjs.com/' target='_blank') npm
           | .
         pre
           code.shell.
@@ -126,7 +125,7 @@ head
             
         .bullet.shade
           .description
-            | Here&apos;s a list of all possible settings that can be used to configure Slack DevKit.
+            | Here's a list of all possible settings that can be used to configure Slack DevKit.
             br
             table
               thead
@@ -210,7 +209,7 @@ head
             br
             | The server is preconfigured to use 
             a(href='https://github.com/localtunnel/localtunnel' target='_blank') LocalTunnel
-            |  if you&apos;ve installed the module (it&apos;s not preloaded).
+            |  if you've installed the module (it's not preloaded).
           pre
             code.javascript.
               const { server } = new Slack(settings)
@@ -239,7 +238,7 @@ head
             
         .bullet
           .description
-            b Slack API
+            b API
             br
             | Make authenticated calls to the Slack API by calling the 
             code api
@@ -370,13 +369,13 @@ head
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L81", target="_blank") match(regex)
-                  td Match the message text against a regex
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L94", target="_blank") is(event_type)
+                  td Check if the payload is a type of event
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L94", target="_blank") is(event_type)
-                  td Check if the payload is a type of event
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L81", target="_blank") match(regex)
+                  td Match the message text against a regex
 
         ul.bullet
           a.smallbutton(href='https://github.com/johnagan/slack-devkit/blob/master/lib/request.js' target='_blank') More on Requests
@@ -478,7 +477,7 @@ head
         | Sample Application
       .bullet
         .description
-          | Here&apos;s a sample application using some commonly used Slack features
+          | Here's a sample application using some commonly used Slack features
         pre
           code.javascript.
             const Slack = require('slack-devkit')
@@ -569,7 +568,6 @@ head
   a#github(href='http://github.com/johnagan/slack-devkit/' target='_blank')
     img(alt='Fork me on GitHub' src='forkme.png')
 
-// Global site tag (gtag.js) - Google Analytics
 script(async='' src='https://www.googletagmanager.com/gtag/js?id=UA-7259055-6')
 script.
   window.dataLayer = window.dataLayer || [];

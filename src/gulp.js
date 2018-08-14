@@ -1,14 +1,12 @@
 const gulp = require('gulp')
 const pug = require('gulp-pug')
 const concat = require('gulp-concat')
-const minifyCSS = require('gulp-csso')
+const data = require('./data.json')
 const DOCS_PATH = '../docs'
 
-const data = {}
 
 gulp.task('css', function() {
   return gulp.src('docs/css/*.css')
-    // .pipe(minifyCSS({}))
     .pipe(concat('styles.css'))
     .pipe(gulp.dest(DOCS_PATH))
 })

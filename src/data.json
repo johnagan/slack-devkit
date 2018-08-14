@@ -1,0 +1,5 @@
+{
+  "name": "Slack DevKit",
+  "title": "Slack DevKit: A light-weight developer kit to Build Slack Apps in node.js",
+  "description": "Slack DevKit is a light-weight developer kit to build Slack Apps in node.js super fast. No previous knowledge about building Slack Apps or Bots needed. Also includes automatic support for verifying requests from Slack and responding to validations."
+}
