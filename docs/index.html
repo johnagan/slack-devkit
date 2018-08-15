@@ -56,11 +56,11 @@ const { router } = new Slack({
 
 app.use(router)
 </code></pre><div class="notes">Alternatively, you can pass the router into selected routes</div><pre><code class="javascript">app.get('/install', router, (req, res) => {
-
+  req.slack // populated
 })
 
 app.post('/events', router, (req, res) => {
-  
+  req.slack // populated
 })
 </code></pre></div></div></section><!-- DATASTORE--><section name="datastore"><h2>DataStore</h2><div class="bullet"><div class="description"><b>Usage</b><br>All requests from Slack come with a <code>data</code> object that contains authentication information about the workspace and any additional information you would like to save. This object gets populated after <a href="https://api.slack.com/docs/oauth" target="_blank">OAuth</a> has been successful.</div><pre><code class="javascript">server.post('/', (req, res) => {
   // The DataStore associated with the calling workspace

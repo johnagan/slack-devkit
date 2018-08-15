@@ -1,6 +1,6 @@
 {
   "name": "slack-devkit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Slack developer kit to make building Slack apps easy.",
   "author": "John Agan <johnagan@gmail.com>",
   "main": "index.js",

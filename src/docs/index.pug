@@ -411,11 +411,11 @@ head
           pre
             code.javascript.
               app.get('/install', router, (req, res) => {
-
+                req.slack // populated
               })
 
               app.post('/events', router, (req, res) => {
-                
+                req.slack // populated
               })
 
     // DATASTORE
