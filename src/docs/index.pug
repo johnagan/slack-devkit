@@ -227,7 +227,7 @@ head
           .description
             | The 
             a(href='https://github.com/johnagan/slack-devkit/blob/master/lib/request.js' target='_blank') Slack Request
-            |  is populated on all incoming POST requests and will be attached to the Express.js request object. All helper methods on
+            |  is populated on all incoming POST requests and will be attached to the Express.js request object. All helper methods on  
             a(href='https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js' target='_blank') Payload
             |  can also be called from the Request.
           pre
@@ -380,6 +380,44 @@ head
         ul.bullet
           a.smallbutton(href='https://github.com/johnagan/slack-devkit/blob/master/lib/request.js' target='_blank') More on Requests
           a.smallbutton(href='https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js' target='_blank') More on Payloads
+    
+    // ROUTER
+    section(name='requests')
+      h2#getting-started Router
+      .content
+        .bullet
+          .description
+            | The 
+            a(href='https://github.com/johnagan/slack-devkit/blob/master/lib/router.js' target='_blank') Slack Router
+            |  is an  
+            a(href='http://expressjs.com/en/4x/api.html#router' target="_blank") Express.js Router
+            | that can be used as middleware in existing Express.js apps.
+          pre
+            code.javascript.
+              const express = require('express'),
+                Slack = require('slack-devkit'),
+                app = express()
+
+              const { router } = new Slack({
+                scope: SCOPE,
+                client_id: CLIENT_ID,
+                client_secret: CLIENT_SECRET,
+                signing_secret: SIGNING_SECRET
+              })
+
+              app.use(router)
+          
+          .notes Alternatively, you can pass the router into selected routes
+          pre
+            code.javascript.
+              app.get('/install', router, (req, res) => {
+
+              })
+
+              app.post('/events', router, (req, res) => {
+                
+              })
+
     // DATASTORE
     section(name='datastore')
       h2 DataStore
