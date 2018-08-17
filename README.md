@@ -1,6 +1,6 @@
 ![](https://cl.ly/3V2e321C0D00/logo-black.png)
 
-# Slack Development Kit
+# Slack DevKit
 Slack DevKit is a light-weight developer kit to build [Slack Apps](https://api.slack.com/slack-apps) in node.js **super fast**. No previous knowledge about building Slack Apps or Bots needed! Plus, automatic support for verifying requests from Slack and responding to validations.
 
 This was made to build Slack Apps on [Glitch](https://glitch.com) even faster, but it works everywhere!
