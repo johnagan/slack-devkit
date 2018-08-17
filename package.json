@@ -1,6 +1,6 @@
 {
   "name": "slack-devkit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Slack developer kit to make building Slack apps easy.",
   "author": "John Agan <johnagan@gmail.com>",
   "main": "index.js",
@@ -24,9 +24,6 @@
   "scripts": {
     "test": "mocha",
     "docs": "gulp --gulpfile src/gulp.js"
-  },
-  "dependencies": {
-    "express": "^4.16.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
