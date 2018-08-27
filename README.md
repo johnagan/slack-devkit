@@ -21,13 +21,15 @@ Learn more on [SlackDevKit.com](https://slackdevkit.com)
 
 
 ### What's Included
-* [App](./lib/app.js) - The Slack App
-* [Request](./lib/request.js) - The request made from Slack
-* [Client](./lib/client.js) - Minimal HTTPS client (to call other APIs)
-* [Payload](./lib/payload.js) - Wrapper for Slack payloads (to standardize attributes)
-* [FileStore](./lib/filestore.js) - File-based storage to save workspace information to
-* [Router](./lib/router.js) - An [Express.js](https://expressjs.com/) router (middleware)
-* [Server](./lib/server.js) - An [Express.js](https://expressjs.com/) instance with the router attached
+* [App](./core/app.js) - The Slack App
+* [Request](./core/request.js) - The request made from Slack
+* [Client](./core/client.js) - Minimal HTTPS client (to call other APIs)
+* [Payload](./core/payload.js) - Wrapper for Slack payloads (to standardize attributes)
+* [Router](./server/router.js) - An [Express.js](https://expressjs.com/) router (middleware)
+* [Express](./server/express.js) - An [Express.js](https://expressjs.com/) instance with the router attached
+* [Lambda](./server/lambda.js) - An [AWS Lambda](https://aws.amazon.com/lambda/) AWS Lambda handler
+* [FileStore](./datastore/filestore.js) - File-based storage to save workspace information
+* [DynamoDB](./datastore/dynamodb.js) - DynamoDB storage to save workspace information
 
 
 ### Examples
