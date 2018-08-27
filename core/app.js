@@ -1,5 +1,4 @@
 const
-  FileStore = require('./filestore'),
   client = require('./client'),
   qs = require('querystring'),
   crypto = require('crypto')
@@ -27,13 +26,7 @@ class App {
    * @memberof App
    */
   constructor(settings = {}) {
-    let { datastore } = settings
-
-    // load the file datastore if none is provided
-    if (datastore === undefined || typeof datastore === "string")
-      datastore = new FileStore(datastore)
-
-    Object.assign(this, settings, { datastore })
+    Object.assign(this, settings)
   }
 
 
@@ -121,26 +114,6 @@ class App {
 
 
   /**
-   * Install the App on a Slack Workspace
-   *
-   * @param {string} [query.code] The OAuth access code
-   * @param {string} [query.team] Slack team ID of a workspace to attempt to restrict to
-   * @param {string} [query.state] unique string to be passed back upon completion 
-   * @param {boolean} [query.single_channel] Flag to present single-channel mode
-   * @returns {Promise} The Slack access info
-   * @memberof App
-   */
-  install(query = {}) {
-    const { code } = query
-
-    if (code === undefined)
-      return Promise.reject(this.getAuthUrl(query))
-    else
-      return this.authenticate(code).catch(result => result)
-  }
-
-
-  /**
    * Completes the authentication
    *
    * @param {string} code The OAuth access code returns from Slack
@@ -166,8 +139,11 @@ class App {
     const { client_id, client_secret } = this
     const params = { grant_type: 'refresh_token', refresh_token, client_id, client_secret }
 
-    // updated saved access token
-    const update = r => this.datastore.update(team_id, r.data)
+    // update saved access token
+    const update = r => {
+      const updated_data = Object.assign({}, data, r.data)
+      return this.datastore.save(team_id, updated_data)
+    }
 
     // if refresh token is present, attempt to update the access token
     if (refresh_token === undefined) return Promise.resolve(access)

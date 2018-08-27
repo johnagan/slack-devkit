@@ -11,14 +11,15 @@ class Payload {
    * The payload constructor
    *
    * @param {string} body - the request body
+   * @param {object} query - the request querystring
    * @memberof Payload
    */
-  constructor(body) {
+  constructor(body, query) {
     if (typeof body === "string") {
       body = this.constructor.parse(body)
     }
 
-    Object.assign(this, body)
+    Object.assign(this, body, query)
   }
 
   static parse(body) {
@@ -264,6 +265,9 @@ class Payload {
 
     // message came from a bot
     if (this.bot_id) events.push('bot_message')
+
+    // app install event
+    if (this.code) events.push('app_installed')
 
     // event triggered by event type
     if (this.event) events.push('event', this.event.type)

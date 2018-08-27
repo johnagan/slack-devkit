@@ -16,11 +16,14 @@ server.get('/', (req, res) => {
   // and the workspace's authentication information
   const { data, app_url } = req.slack
 
-  // Make an authenticated request to the Slack API
-  req.slack.api('chat.postMessage', {
+  // construct a welcome message to the installer
+  const message = {
     channel: data.installer_user.app_home,
     text: 'Thanks for installing me :bow:'
-  })
+  }
+
+  // Make an authenticated request to the Slack API
+  req.slack.api('chat.postMessage', message)
 
   // open the Slack client to the App Home
   res.redirect(app_url)

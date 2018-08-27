@@ -71,21 +71,6 @@ class FileStore {
 
 
   /**
-   * Updates an existing record
-   *
-   * @param {string} id The id the record
-   * @param {Object} data The record data
-   * @returns {Promise} The updated record
-   * @memberof FileStore
-   */
-  update(id, data) {
-    const update = data => this.data[id] = data
-    const cache = Object.assign({}, this.data[id], data)
-    return this.save(id, cache).then(update)
-  }
-
-
-  /**
    * Recursively creates the folder path as needed
    *
    * @param {string} filePath The relative or absolute path to create

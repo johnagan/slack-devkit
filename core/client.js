@@ -2,7 +2,6 @@ const qs = require('querystring'),
   https = require('https'),
   url = require('url')
 
-
 /**
  * Submit a GET request
  *

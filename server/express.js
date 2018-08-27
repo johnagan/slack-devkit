@@ -1,8 +1,12 @@
-const express = require('express')
+const
+  express = require('express'),
+  Router = require('./router')
 
 
 // Nothing fancy here - just making it easy to start express with the router
-module.exports = function(router, options) {
+module.exports = function(options) {
+  const router = new Router(options)
+
   const app = express()
   app.use(options.route || '/', router)
 

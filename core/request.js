@@ -16,8 +16,21 @@ class Request extends Payload {
    * @memberof Request
    */
   constructor(app = {}, request = {}, data = {}) {
-    super(request.body)
+    super(request.body, request.query)
     Object.assign(this, { app, request, data })
+  }
+
+
+  /**
+   * Get a header value
+   *
+   * @param {string} name Header name
+   * @returns {string} Header value
+   * @memberof Request
+   */
+  getHeader(name) {
+    const { headers } = this.request
+    return headers[name] || headers[name.toLowerCase()]
   }
 
 
@@ -31,6 +44,20 @@ class Request extends Payload {
   get app_url() {
     const { app, data } = this
     return `${app.root_url}/app_redirect?app=${data.app_id}`
+  }
+
+
+  /**
+   * The Add to Slack url, based on the request
+   *
+   * @readonly
+   * @returns {string} the Add to Slack url
+   * @memberof Request
+   */
+  get install_url() {
+    const { query, method } = this.request
+    if (method === 'GET' && query.code === undefined)
+      return this.app.getAuthUrl(query)
   }
 
 
@@ -54,7 +81,7 @@ class Request extends Payload {
    * @memberof Request
    */
   get valid_timestamp() {
-    const timestamp = this.request.headers['x-slack-request-timestamp']
+    const timestamp = this.getHeader('X-Slack-Request-Timestamp')
     return this.app.verifyTimestamp(timestamp)
   }
 
@@ -67,8 +94,8 @@ class Request extends Payload {
    * @memberof Request
    */
   get valid_signature() {
-    const signature = this.request.headers['x-slack-signature']
-    const timestamp = this.request.headers['x-slack-request-timestamp']
+    const signature = this.getHeader('X-Slack-Signature')
+    const timestamp = this.getHeader('X-Slack-Request-Timestamp')
     return this.app.verifySignature(signature, timestamp, this.request.body)
   }
 
@@ -93,7 +120,7 @@ class Request extends Payload {
    * @memberof Request
    */
   get retry_reason() {
-    return this.request.headers['x-slack-retry-reason']
+    return this.getHeader('X-Slack-Retry-Reason')
   }
 
 
@@ -105,7 +132,7 @@ class Request extends Payload {
    * @memberof Request
    */
   get retry_number() {
-    return parseInt(this.request.headers['x-slack-retry-num'] || 0)
+    return parseInt(this.getHeader('X-Slack-Retry-Num') || 0)
   }
 
 
@@ -149,7 +176,7 @@ class Request extends Payload {
    * @memberof Request
    */
   reply(args) {
-    let endpoint = 'chat.postMessage'
+    let endpoint = 'chat.postRequest'
     const { response_url, channel_id } = this
     if (response_url) endpoint = response_url
     if (args.channel == undefined) args.channel = channel_id
@@ -203,9 +230,9 @@ class Request extends Payload {
    * @memberof Request
    */
   install() {
-    const { query } = this.request
+    const { code } = this
     const update = r => this.update(r.data)
-    return this.app.install(query).then(update)
+    return this.app.authenticate(code).then(update).catch(update)
   }
 
 
@@ -242,10 +269,9 @@ class Request extends Payload {
    * @memberof Request
    */
   update(data) {
+    this.data = data
     const { ok, team_id } = data
-    const update = data => this.data = data
-    if (ok === false) return Promise.resolve(data) // invalid
-    else return this.app.datastore.update(team_id, data).then(update)
+    if (ok === true) this.app.datastore.save(team_id, data)
   }
 
 

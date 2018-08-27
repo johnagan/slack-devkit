@@ -56,9 +56,6 @@ head
         li Automatic Slack payload normalization
         li Auto validates Events API challenges
         li Supports Single Channel Installations
-        li
-          | Only one dependency: 
-          a(href='https://expressjs.com' target='_blank') express.js
       a.bigbutton(target='_blank' href='https://github.com/johnagan/slack-devkit/tree/master/examples') View Examples
     
     // INSTALLATION
@@ -190,9 +187,9 @@ head
             b Local Host
             br
             | The 
-            a(href='https://github.com/johnagan/slack-devkit/blob/master/lib/server.js' target='_blank') Slack Server
+            a(href='https://github.com/johnagan/slack-devkit/blob/master/core/server.js' target='_blank') Slack Server
             |  is a preconfigured Express.js instance with the 
-            a(href='https://github.com/johnagan/slack-devkit/blob/master/lib/router.js' target='_blank') Router
+            a(href='https://github.com/johnagan/slack-devkit/blob/master/core/router.js' target='_blank') Router
             |  already attached.
           pre
             code.javascript.
@@ -226,9 +223,9 @@ head
         .bullet
           .description
             | The 
-            a(href='https://github.com/johnagan/slack-devkit/blob/master/lib/request.js' target='_blank') Slack Request
+            a(href='https://github.com/johnagan/slack-devkit/blob/master/core/request.js' target='_blank') Slack Request
             |  is populated on all incoming POST requests and will be attached to the Express.js request object. All helper methods on  
-            a(href='https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js' target='_blank') Payload
+            a(href='https://github.com/johnagan/slack-devkit/blob/master/core/payload.js' target='_blank') Payload
             |  can also be called from the Request.
           pre
             code.javascript.
@@ -312,42 +309,42 @@ head
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L44", target="_blank") action
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/core/payload.js#L44", target="_blank") action
                   td Interactive message's selected action
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L55", target="_blank") selection
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/core/payload.js#L55", target="_blank") selection
                   td The message's selected option
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L118", target="_blank") text
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/core/payload.js#L118", target="_blank") text
                   td The message text
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L144", target="_blank") bot_id
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/core/payload.js#L144", target="_blank") bot_id
                   td The bot id the payload was sent from (if applicable)
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L166", target="_blank") channel_id
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/core/payload.js#L166", target="_blank") channel_id
                   td The channel id the payload was sent from
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L197", target="_blank") team_id
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/core/payload.js#L197", target="_blank") team_id
                   td The team id the payload was sent from
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L228", target="_blank") user_id
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/core/payload.js#L228", target="_blank") user_id
                   td The user id that sent the payload
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L259", target="_blank") event_types
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/core/payload.js#L259", target="_blank") event_types
                   td Event types that triggered this payload
             
             table
@@ -359,27 +356,27 @@ head
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L68", target="_blank") subcommand(name)
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/core/payload.js#L68", target="_blank") subcommand(name)
                   td The sub-command arguments for a command
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L106", target="_blank") isSubCommand(name)
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/core/payload.js#L106", target="_blank") isSubCommand(name)
                   td Check if the a slash command contains a sub-command
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L94", target="_blank") is(event_type)
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/core/payload.js#L94", target="_blank") is(event_type)
                   td Check if the payload is a type of event
                 tr
                   td
                     code 
-                      a(href="https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js#L81", target="_blank") match(regex)
+                      a(href="https://github.com/johnagan/slack-devkit/blob/master/core/payload.js#L81", target="_blank") match(regex)
                   td Match the message text against a regex
 
         ul.bullet
-          a.smallbutton(href='https://github.com/johnagan/slack-devkit/blob/master/lib/request.js' target='_blank') More on Requests
-          a.smallbutton(href='https://github.com/johnagan/slack-devkit/blob/master/lib/payload.js' target='_blank') More on Payloads
+          a.smallbutton(href='https://github.com/johnagan/slack-devkit/blob/master/core/request.js' target='_blank') More on Requests
+          a.smallbutton(href='https://github.com/johnagan/slack-devkit/blob/master/core/payload.js' target='_blank') More on Payloads
     
     // ROUTER
     section(name='requests')
@@ -388,7 +385,7 @@ head
         .bullet
           .description
             | The  
-            a(href='https://github.com/johnagan/slack-devkit/blob/master/lib/router.js' target='_blank') Slack Router
+            a(href='https://github.com/johnagan/slack-devkit/blob/master/core/router.js' target='_blank') Slack Router
             |  is an  
             a(href='http://expressjs.com/en/4x/api.html#router' target="_blank") Express.js Router
             |  that can be used as middleware in existing Express.js apps.
@@ -418,6 +415,45 @@ head
                 req.slack // populated
               })
 
+    // Lambda
+    section(name='lambda')
+      h2#getting-started Lambda
+      .content
+        .bullet
+          .description 
+            | Slack DevKit has built-in support for 
+            a(href="https://aws.amazon.com/lambda/" target="_blank") AWS Lambda 
+            |  with 
+            a(href="https://aws.amazon.com/dynamodb/" target="_blank") DynamoDB
+            |  . When constructing Slack DevKit, pass-in the DynamoDB table name to use in the 
+            code datastore
+            |  property.
+          pre
+            code.javascript.
+              const { lambda } = new Slack({
+                scope: 'commands,files:write,links:read,links:write',
+                client_id: "1212313.1231231231231",
+                client_secret: "12312312323123123",
+                signing_secret: "sdfsadfsadfasdfas",
+                datastore: 'workspaces' // DynamoDB Table Name
+              })
+
+              exports.handler = lambda((slack, context, callback) => {
+                slack // the Slack Request object
+
+                // respond to lambda normally
+                return content.succeed(slack.data)
+              }
+      .bullet
+        .description
+          b Serverless.js
+          br
+          | Slack DevKit's Lambda handler is easier to deploy using 
+          a(href="https://serverless.com" target="_blank") Serverless.js
+          |  coupled with the included 
+          a(href="https://github.com/johnagan/slack-devkit/blob/master/examples/serverless.example.yml" target="_blank") Serverless.js template
+          |.
+          
     // DATASTORE
     section(name='datastore')
       h2 DataStore

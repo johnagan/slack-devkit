@@ -1,4 +1,6 @@
 node_modules
+serverless.yml
+.serverless
 .DS_Store
 .vscode
 .data
