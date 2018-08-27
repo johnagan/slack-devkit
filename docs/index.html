@@ -74,7 +74,7 @@ exports.handler = lambda((slack, context, callback) => {
   slack // the Slack Request object
 
   // respond to lambda normally
-  return content.succeed(slack.data)
+  return context.succeed(slack.data)
 }</code></pre></div></div><div class="bullet"><div class="description"><b>Serverless.js</b><br>Slack DevKit's Lambda handler is easier to deploy using <a href="https://serverless.com" target="_blank">Serverless.js</a> coupled with the included <a href="https://github.com/johnagan/slack-devkit/blob/master/examples/serverless.example.yml" target="_blank">Serverless.js template</a>.</div></div></section><!-- DATASTORE--><section name="datastore"><h2>DataStore</h2><div class="bullet"><div class="description"><b>Usage</b><br>All requests from Slack come with a <code>data</code> object that contains authentication information about the workspace and any additional information you would like to save. This object gets populated after <a href="https://api.slack.com/docs/oauth" target="_blank">OAuth</a> has been successful.</div><pre><code class="javascript">server.post('/', (req, res) => {
   // The DataStore associated with the calling workspace
   req.slack.data 

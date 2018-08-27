@@ -444,7 +444,7 @@ head
                 slack // the Slack Request object
 
                 // respond to lambda normally
-                return content.succeed(slack.data)
+                return context.succeed(slack.data)
               }
       .bullet
         .description
