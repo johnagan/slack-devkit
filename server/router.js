@@ -31,7 +31,7 @@ module.exports = function(settings) {
     // redirect to OAuth
     if (install_url) return res.redirect(install_url)
 
-    // OAuth callback form Slack
+    // OAuth callback from Slack
     if (code) return req.slack.install().then(done)
 
     // Failed request verification
