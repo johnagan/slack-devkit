@@ -38,8 +38,7 @@ Learn more on [SlackDevKit.com](https://slackdevkit.com)
 | [features.js](./examples/features.js) | Examples of some common Slack App features
 | [internal-integration.js](./examples/internal-integration.js) | Example configuration of an [internal integrations](https://api.slack.com/slack-apps#internal_integrations)
 | [storing-data.js](./examples/storing-data.js) | Example of storing and retrieving data from the datastore
-| [express.js](./examples/express.js) | Example of adding Slack DevKit to an exiting [Express.js](https://expressjs.com/) 
-server
+| [express.js](./examples/express.js) | Example of adding Slack DevKit to an exiting [Express.js](https://expressjs.com/) server
 | [lambda.js](./examples/lambda.js) | Using Slack DevKit with AWS Lambda and DynamoDB
 
 ## Getting Started
