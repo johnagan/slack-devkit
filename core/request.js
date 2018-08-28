@@ -176,7 +176,7 @@ class Request extends Payload {
    * @memberof Request
    */
   reply(args) {
-    let endpoint = 'chat.postRequest'
+    let endpoint = 'chat.postMessage'
     const { response_url, channel_id } = this
     if (response_url) endpoint = response_url
     if (args.channel == undefined) args.channel = channel_id
