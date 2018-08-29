@@ -231,7 +231,7 @@ head
             |  can also be called from the Request.
           pre
             code.javascript.
-              server.on('/', (req, res) => {
+              server.post('/', (req, res) => {
                 req.slack // this is the Slack Request object
               })
             
