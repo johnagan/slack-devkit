@@ -433,10 +433,10 @@ head
           pre
             code.javascript.
               const { lambda } = new Slack({
-                scope: 'commands,files:write,links:read,links:write',
-                client_id: "1212313.1231231231231",
-                client_secret: "12312312323123123",
-                signing_secret: "sdfsadfsadfasdfas",
+                scope: SCOPE,
+                client_id: CLIENT_ID,
+                client_secret: CLIENT_SECRET,
+                signing_secret: SIGNING_SECRET,
                 datastore: 'workspaces' // DynamoDB Table Name
               })
 
@@ -503,10 +503,10 @@ head
         pre
           code.javascript.
             new Slack({
-              scope: 'commands,files:write,links:read,links:write',
-              client_id: "1212313.1231231231231",
-              client_secret: "12312312323123123",
-              signing_secret: "sdfsadfsadfasdfas",
+              scope: SCOPE,
+              client_id: CLIENT_ID,
+              client_secret: CLIENT_SECRET,
+              signing_secret: SIGNING_SECRET,
               datastore: 'data/all-my-dataz.json'
             })
 
@@ -540,10 +540,10 @@ head
             }
 
             new Slack({
-              scope: 'commands,files:write,links:read,links:write',
-              client_id: "1212313.1231231231231",
-              client_secret: "12312312323123123",
-              signing_secret: "sdfsadfsadfasdfas",
+              scope: SCOPE,
+              client_id: CLIENT_ID,
+              client_secret: CLIENT_SECRET,
+              signing_secret: SIGNING_SECRET,
               datastore: new CustomDataStore()
             })
           
@@ -556,14 +556,15 @@ head
           | Here's a sample application using some commonly used Slack features
         pre
           code.javascript.
+            const { SCOPE, CLIENT_ID, CLIENT_SECRET, SIGNING_SECRET } = process.env
             const Slack = require('slack-devkit')
 
             // Configure express with the Slack App settings
             const { server, client } = new Slack({
-              scope: 'commands,files:write,links:read,links:write',
-              client_id: "1212313.1231231231231",
-              client_secret: "12312312323123123",
-              signing_secret: "sdfsadfsadfasdfas"
+              scope: SCOPE,
+              client_id: CLIENT_ID,
+              client_secret: CLIENT_SECRET,
+              signing_secret: SIGNING_SECRET
             })
 
             // All GET routes redirect to the “Add to Slack” OAuth flow

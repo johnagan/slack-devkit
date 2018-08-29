@@ -63,10 +63,10 @@ app.post('/events', router, (req, res) => {
   req.slack // populated
 })
 </code></pre></div></div></section><!-- Lambda--><section name="lambda"><h2 id="getting-started">Lambda</h2><div class="content"><div class="bullet"><div class="description"> Slack DevKit has built-in support for <a href="https://aws.amazon.com/lambda/" target="_blank">AWS Lambda </a> with <a href="https://aws.amazon.com/dynamodb/" target="_blank">DynamoDB</a> . When constructing Slack DevKit, pass-in the DynamoDB table name to use in the <code>datastore</code> property.</div><pre><code class="javascript">const { lambda } = new Slack({
-  scope: 'commands,files:write,links:read,links:write',
-  client_id: "1212313.1231231231231",
-  client_secret: "12312312323123123",
-  signing_secret: "sdfsadfsadfasdfas",
+  scope: SCOPE,
+  client_id: CLIENT_ID,
+  client_secret: CLIENT_SECRET,
+  signing_secret: SIGNING_SECRET,
   datastore: 'workspaces' // DynamoDB Table Name
 })
 
@@ -96,10 +96,10 @@ exports.handler = lambda((slack, context, callback) => {
   req.slack.update(data)
 })
 </code></pre></div><div class="bullet"><div class="description"><b>Custom Path</b><br>The default DataStore is JSON and written to file at <code>.data/workspaces</code>. You can change this by passing in a new path to the <code>datastore</code> setting.</div><pre><code class="javascript">new Slack({
-  scope: 'commands,files:write,links:read,links:write',
-  client_id: "1212313.1231231231231",
-  client_secret: "12312312323123123",
-  signing_secret: "sdfsadfsadfasdfas",
+  scope: SCOPE,
+  client_id: CLIENT_ID,
+  client_secret: CLIENT_SECRET,
+  signing_secret: SIGNING_SECRET,
   datastore: 'data/all-my-dataz.json'
 })
 </code></pre></div><div class="bullet"><div class="description"><b>Custom DataStore</b><br>If you want something a little more powerful than a filestore, you can pass in your own custom DataStore object to <code>datastore</code> and Slack DevKit will attempt to use that instead.</div><pre><code class="javascript">class CustomDataStore {
@@ -123,20 +123,21 @@ exports.handler = lambda((slack, context, callback) => {
 }
 
 new Slack({
-  scope: 'commands,files:write,links:read,links:write',
-  client_id: "1212313.1231231231231",
-  client_secret: "12312312323123123",
-  signing_secret: "sdfsadfsadfasdfas",
+  scope: SCOPE,
+  client_id: CLIENT_ID,
+  client_secret: CLIENT_SECRET,
+  signing_secret: SIGNING_SECRET,
   datastore: new CustomDataStore()
 })
-</code></pre></div></section><!-- SAMPLE--><section name="sample"><h2>Sample Application</h2><div class="bullet"><div class="description">Here's a sample application using some commonly used Slack features</div><pre><code class="javascript">const Slack = require('slack-devkit')
+</code></pre></div></section><!-- SAMPLE--><section name="sample"><h2>Sample Application</h2><div class="bullet"><div class="description">Here's a sample application using some commonly used Slack features</div><pre><code class="javascript">const { SCOPE, CLIENT_ID, CLIENT_SECRET, SIGNING_SECRET } = process.env
+const Slack = require('slack-devkit')
 
 // Configure express with the Slack App settings
 const { server, client } = new Slack({
-  scope: 'commands,files:write,links:read,links:write',
-  client_id: "1212313.1231231231231",
-  client_secret: "12312312323123123",
-  signing_secret: "sdfsadfsadfasdfas"
+  scope: SCOPE,
+  client_id: CLIENT_ID,
+  client_secret: CLIENT_SECRET,
+  signing_secret: SIGNING_SECRET
 })
 
 // All GET routes redirect to the “Add to Slack” OAuth flow
