@@ -1,4 +1,5 @@
-const qs = require('querystring'),
+const
+  qs = require('querystring'),
   https = require('https'),
   url = require('url')
 
