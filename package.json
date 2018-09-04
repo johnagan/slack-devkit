@@ -1,6 +1,6 @@
 {
   "name": "slack-devkit",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A Slack developer kit to make building Slack apps easy.",
   "author": "John Agan <johnagan@gmail.com>",
   "main": "dist/index.js",
@@ -28,11 +28,8 @@
   ],
   "scripts": {
     "test": "mocha",
-    "prepush": "npm run build",
-    "install": "npm run build",
     "clean": "rm -rf dist docs",
-    "prepublish": "npm run build",
-    "build": "npm run clean && gulp",
+    "prepare": "npm run clean && gulp",
     "lint": "tslint src/*.ts -t verbose"
   },
   "devDependencies": {
