@@ -10,8 +10,8 @@ class Payload {
   /**
    * The payload constructor
    *
-   * @param {string} body - the request body
-   * @param {object} query - the request querystring
+   * @param {string} body the request body
+   * @param {object} query the request querystring
    * @memberof Payload
    */
   constructor(body, query) {
@@ -62,7 +62,7 @@ class Payload {
   /**
    * Get the sub-command arguments for a command
    *
-   * @param {string} name - the sub-command name
+   * @param {string} name the sub-command name
    * @return {string} the sub-command arguments
    * @memberof Payload
    */
@@ -75,7 +75,7 @@ class Payload {
   /**
    * Match the message text against a regex
    *
-   * @param {RegExp} regex - the regex to test
+   * @param {RegExp} regex the regex to test
    * @return {Array} the regex match
    * @memberof Payload
    */
@@ -88,7 +88,7 @@ class Payload {
   /**
    * Check if the payload is a type of event
    *
-   * @param {String} type - the event type to check
+   * @param {String} type the event type to check
    * @return {Boolean} does the payload match the type 
    * @memberof Payload
    */
@@ -100,7 +100,7 @@ class Payload {
   /**
    * Check if the a slash command contains a sub-command
    *
-   * @param {String} name - the sub-command name
+   * @param {String} name the sub-command name
    * @return {Boolean} is the command a sub-command
    * @memberof Payload
    */
@@ -128,7 +128,7 @@ class Payload {
   /**
    * Set the text
    *
-   * @param {String} text - the text
+   * @param {String} text the text
    * @memberof Payload
    */
   set text(text) {
@@ -150,7 +150,7 @@ class Payload {
   /**
    * Set the bot id
    *
-   * @param {String} bot_id - the bot id
+   * @param {String} bot_id the bot id
    * @memberof Payload
    */
   set bot_id(bot_id) {
@@ -181,7 +181,7 @@ class Payload {
   /**
    * Set the channel id
    *
-   * @param {String} channel_id - the channel id
+   * @param {String} channel_id the channel id
    * @memberof Payload
    */
   set channel_id(channel_id) {
@@ -212,7 +212,7 @@ class Payload {
   /**
    * Set the team id
    *
-   * @param {String} team_id - the team id
+   * @param {String} team_id the team id
    * @memberof Payload
    */
   set team_id(team_id) {
@@ -243,7 +243,7 @@ class Payload {
   /**
    * Set the user id
    *
-   * @param {String} user_id - the user id
+   * @param {String} user_id the user id
    * @memberof Payload
    */
   set user_id(user_id) {

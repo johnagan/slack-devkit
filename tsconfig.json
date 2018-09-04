@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "target": "es2015",
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "pretty": true,
+    "outDir": "dist",
+    "rootDir": "./src",
+    "baseUrl": "."
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "files": [
+    "src/**/*.{ts,js}"
+  ]
+}

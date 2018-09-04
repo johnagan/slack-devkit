@@ -4,3 +4,4 @@ serverless.yml
 .DS_Store
 .vscode
 .data
+dist

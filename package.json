@@ -1,9 +1,9 @@
 {
   "name": "slack-devkit",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "A Slack developer kit to make building Slack apps easy.",
   "author": "John Agan <johnagan@gmail.com>",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -12,29 +12,41 @@
   "bugs": {
     "url": "https://github.com/johnagan/slack-devkit/issues"
   },
+  "engines": {
+    "node": ">=6.14.4"
+  },
   "homepage": "https://github.com/johnagan/slack-devkit",
   "keywords": [
     "slack",
     "router",
     "express",
     "middleware",
+    "serverless",
+    "lambda",
     "sdk",
     "bot"
   ],
   "scripts": {
     "test": "mocha",
-    "build": "gulp",
-    "deploy": "serverless deploy -v",
-    "remove": "serverless remove",
-    "prepublish": "npm run build"
+    "prepush": "npm run build",
+    "install": "npm run build",
+    "clean": "rm -rf dist docs",
+    "prepublish": "npm run build",
+    "build": "npm run clean && gulp",
+    "lint": "tslint src/*.ts -t verbose"
   },
   "devDependencies": {
+    "@types/node": "^10.9.3",
     "chai": "^3.5.0",
     "express": "^4.16.3",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-pug": "^4.0.1",
+    "gulp-tslint": "^8.1.3",
+    "gulp-typescript": "^5.0.0-alpha.3",
     "mocha": "^5.2.0",
-    "serverless": "^1.30.1"
+    "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.10.0",
+    "typescript": "^3.0.3"
   }
 }

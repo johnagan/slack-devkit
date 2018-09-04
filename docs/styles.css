@@ -1,5 +1,4 @@
 /* http://www.brandgradients.com/blue-gradient/ */
-
 #standalone {
   line-height: 150%;
 }
@@ -135,6 +134,8 @@ a.issue-tracker {
   display: -ms-flexbox;
   display: -webkit-box;
   display: -moz-box;
+  direction: column;
+  flex-direction: column;
   -ms-flex-direction: column;
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;
@@ -148,6 +149,8 @@ a.issue-tracker {
   display: -ms-flexbox;
   display: -webkit-box;
   display: -moz-box;
+  direction: column;
+  flex-direction: column;
   -ms-flex-direction: column;
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;
@@ -234,6 +237,8 @@ a.issue-tracker {
   display: -ms-flexbox;
   display: -webkit-box;
   display: -moz-box;
+  direction: row;
+  flex-direction: row;
   -ms-flex-direction: row;
   -webkit-box-orient: horizontal;
   -moz-box-orient: horizontal;
@@ -273,6 +278,8 @@ a.issue-tracker {
   display: -ms-flexbox;
   display: -webkit-box;
   display: -moz-box;
+  direction: column;
+  flex-direction: column;
   -ms-flex-direction: column;
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;
@@ -339,6 +346,8 @@ ul.bullet {
   display: -ms-flexbox;
   display: -webkit-box;
   display: -moz-box;
+  direction: row;
+  flex-direction: row;
   -ms-flex-direction: row;
   -webkit-box-orient: horizontal;
   -moz-box-orient: horizontal;
@@ -370,6 +379,8 @@ ul.bullet a:last-child {
   display: -ms-flexbox;
   display: -webkit-box;
   display: -moz-box;
+  direction: column;
+  flex-direction: column;
   -ms-flex-direction: column;
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;
@@ -390,6 +401,8 @@ ul.bullet a:last-child {
   display: -ms-flexbox;
   display: -webkit-box;
   display: -moz-box;
+  direction: column;
+  flex-direction: column;
   -ms-flex-direction: column;
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;

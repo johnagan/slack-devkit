@@ -1,0 +1,9 @@
+{
+  "extends": "tslint-config-airbnb",
+  "rules": {
+    "variable-name": false,
+    "no-parameter-reassignment": false,
+    "trailing-comma": [true, { "multiline": false, "singleline": "never" }],
+    "prefer-array-literal": [true, { "allow-type-parameters": true }]
+  }
+}
