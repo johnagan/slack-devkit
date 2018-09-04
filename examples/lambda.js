@@ -12,7 +12,6 @@ const { lambda } = new Slack({
 })
 
 exports.handler = lambda((slack, context, callback) => {
-
   // route events based on the payload
   if (slack.is('app_installed'))
     return sendInstallMessage(slack, context)
