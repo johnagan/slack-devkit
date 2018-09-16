@@ -1,6 +1,6 @@
 {
   "name": "slack-devkit",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A Slack developer kit to make building distributed Slack apps easy.",
   "author": "John Agan <johnagan@gmail.com>",
   "main": "dist/index.js",
@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@types/node": "^10.9.3",
+    "aws-sdk": "^2.315.0",
     "chai": "^3.5.0",
     "express": "^4.16.3",
     "gulp": "^3.9.1",
