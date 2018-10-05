@@ -1,4 +1,4 @@
-const qs = require('querystring')
+const qs = require('querystring');
 
 /**
  * Slack Payload
@@ -6,7 +6,6 @@ const qs = require('querystring')
  * @class Payload
  */
 class Payload {
-
   /**
    * The payload constructor
    *
@@ -15,26 +14,25 @@ class Payload {
    * @memberof Payload
    */
   constructor(body, query) {
-    if (typeof body === "string") {
-      body = this.constructor.parse(body)
+    if (typeof body === 'string') {
+      body = this.constructor.parse(body);
     }
 
-    Object.assign(this, body, query)
+    Object.assign(this, body, query);
   }
 
   static parse(body) {
     try {
-      body = JSON.parse(body)
+      body = JSON.parse(body);
     } catch (e) {
-      body = qs.parse(body)
+      body = qs.parse(body);
     }
 
     // interactive messages
-    if (body.payload) body = JSON.parse(body.payload)
+    if (body.payload) body = JSON.parse(body.payload);
 
-    return body
+    return body;
   }
-
 
   /**
    * Get an interactive message's selected action
@@ -43,9 +41,8 @@ class Payload {
    * @memberof Payload
    */
   get action() {
-    if (this.actions) return this.actions[0]
+    if (this.actions) return this.actions[0];
   }
-
 
   /**
    * Get a message's selected option
@@ -54,10 +51,8 @@ class Payload {
    * @memberof Payload
    */
   get selection() {
-    if (this.action && this.action.selected_options)
-      return this.action.selected_options[0]
+    if (this.action && this.action.selected_options) return this.action.selected_options[0];
   }
-
 
   /**
    * Get the sub-command arguments for a command
@@ -67,10 +62,8 @@ class Payload {
    * @memberof Payload
    */
   subcommand(name) {
-    if (this.isSubCommand(name))
-      return this.text.substring(name.length)
+    if (this.isSubCommand(name)) return this.text.substring(name.length);
   }
-
 
   /**
    * Match the message text against a regex
@@ -80,22 +73,20 @@ class Payload {
    * @memberof Payload
    */
   match(regex) {
-    if (typeof regex !== "object") regex = new RegExp(regex, "im")
-    if (this.text) return this.text.match(regex)
+    if (typeof regex !== 'object') regex = new RegExp(regex, 'im');
+    if (this.text) return this.text.match(regex);
   }
-
 
   /**
    * Check if the payload is a type of event
    *
    * @param {String} type the event type to check
-   * @return {Boolean} does the payload match the type 
+   * @return {Boolean} does the payload match the type
    * @memberof Payload
    */
   is(type) {
-    return this.event_types.includes(type) || this.match(type)
+    return this.event_types.includes(type) || this.match(type);
   }
-
 
   /**
    * Check if the a slash command contains a sub-command
@@ -105,10 +96,9 @@ class Payload {
    * @memberof Payload
    */
   isSubCommand(name) {
-    const regex = new RegExp("^" + name, "i")
-    return this.match(regex)
+    const regex = new RegExp('^' + name, 'i');
+    return this.match(regex);
   }
-
 
   /**
    * Get the message text
@@ -118,12 +108,11 @@ class Payload {
    */
   get text() {
     // Slash Commands
-    if (super.text) return super.text
+    if (super.text) return super.text;
 
     // Events API
-    if (this.event && this.event.text) return this.event.text
+    if (this.event && this.event.text) return this.event.text;
   }
-
 
   /**
    * Set the text
@@ -132,9 +121,8 @@ class Payload {
    * @memberof Payload
    */
   set text(text) {
-    super.text = text
+    super.text = text;
   }
-
 
   /**
    * Get the bot id the payload was sent from (if applicable)
@@ -143,9 +131,8 @@ class Payload {
    * @memberof Payload
    */
   get bot_id() {
-    return super.bot_id || (this.event && this.event.bot_id)
+    return super.bot_id || (this.event && this.event.bot_id);
   }
-
 
   /**
    * Set the bot id
@@ -154,9 +141,8 @@ class Payload {
    * @memberof Payload
    */
   set bot_id(bot_id) {
-    super.bot_id = bot_id
+    super.bot_id = bot_id;
   }
-
 
   /**
    * Get the channel id the payload was sent from
@@ -166,17 +152,16 @@ class Payload {
    */
   get channel_id() {
     // Interactive Messages
-    if (this.channel) return this.channel.id
+    if (this.channel) return this.channel.id;
 
     // Slash Commands
-    if (super.channel_id) return super.channel_id
+    if (super.channel_id) return super.channel_id;
 
     // Events API
-    let event = this.event
-    if (event && event.channel) return event.channel
-    if (event && event.item) return event.item.channel
+    let event = this.event;
+    if (event && event.channel) return event.channel;
+    if (event && event.item) return event.item.channel;
   }
-
 
   /**
    * Set the channel id
@@ -185,9 +170,8 @@ class Payload {
    * @memberof Payload
    */
   set channel_id(channel_id) {
-    super.channel_id = channel_id
+    super.channel_id = channel_id;
   }
-
 
   /**
    * Get the team id the payload was sent from
@@ -197,17 +181,16 @@ class Payload {
    */
   get team_id() {
     // Interactive Messages
-    if (this.team) return this.team.id
+    if (this.team) return this.team.id;
 
     // Slash Commands
-    if (super.team_id) return super.team_id
+    if (super.team_id) return super.team_id;
 
     // Events API
-    let event = this.event
-    if (event && event.team) return event.team
-    if (event && event.item) return event.item.team
+    let event = this.event;
+    if (event && event.team) return event.team;
+    if (event && event.item) return event.item.team;
   }
-
 
   /**
    * Set the team id
@@ -216,9 +199,8 @@ class Payload {
    * @memberof Payload
    */
   set team_id(team_id) {
-    super.team_id = team_id
+    super.team_id = team_id;
   }
-
 
   /**
    * Get the user id that sent the payload
@@ -228,17 +210,16 @@ class Payload {
    */
   get user_id() {
     // Interactive Messages
-    if (this.user) return this.user.id
+    if (this.user) return this.user.id;
 
     // Slash Commands
-    if (super.user_id) return super.user_id
+    if (super.user_id) return super.user_id;
 
     // Events API
-    let event = this.event
-    if (event && event.user) return event.user
-    if (event && event.item) return event.item.user
+    let event = this.event;
+    if (event && event.user) return event.user;
+    if (event && event.item) return event.item.user;
   }
-
 
   /**
    * Set the user id
@@ -247,9 +228,8 @@ class Payload {
    * @memberof Payload
    */
   set user_id(user_id) {
-    super.user_id = user_id
+    super.user_id = user_id;
   }
-
 
   /**
    * Get event types that triggered this payload
@@ -258,43 +238,43 @@ class Payload {
    * @memberof Payload
    */
   get event_types() {
-    let events = []
+    let events = [];
 
     // incoming message by type
-    if (this.type) events.push(this.type)
+    if (this.type) events.push(this.type);
 
     // message came from a bot
-    if (this.bot_id) events.push('bot_message')
+    if (this.bot_id) events.push('bot_message');
 
     // app install event
-    if (this.code) events.push('app_installed')
+    if (this.code) events.push('app_installed');
 
     // event triggered by event type
-    if (this.event) events.push('event', this.event.type)
+    if (this.event) events.push('event', this.event.type);
 
     // url challenge request
-    if (this.challenge) events.push('challenge', this.challenge)
+    if (this.challenge) events.push('challenge', this.challenge);
 
     // slash command by command
-    if (this.command) events.push('slash_command', this.command)
+    if (this.command) events.push('slash_command', this.command);
 
     // webhook triggered by trigger word
-    if (this.trigger_word) events.push('webhook', this.trigger_word)
+    if (this.trigger_word) events.push('webhook', this.trigger_word);
 
     // interactive message triggered by callback_id
-    if (this.callback_id) events.push('interactive_message', this.callback_id)
+    if (this.callback_id) events.push('interactive_message', this.callback_id);
 
     // message selection
-    if (this.selection) events.push('message_select', this.selection.value)
+    if (this.selection) events.push('message_select', this.selection.value);
 
     // message button triggered by callback_id
-    if (this.action) events.push('message_button', this.action.value)
+    if (this.action) events.push('message_button', this.action.value);
 
     // ensure unique values
     events = events.filter((v, i, a) => a.indexOf(v) === i);
 
-    return events
+    return events;
   }
 }
 
-module.exports = Payload
+module.exports = Payload;

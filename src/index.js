@@ -1,19 +1,18 @@
-const CACHE = new WeakMap()
+const CACHE = new WeakMap();
 
 function lazyLoad(object, key, loader) {
-  const cache = CACHE.get(object)
+  const cache = CACHE.get(object);
   if (cache[key] === undefined) {
-    cache[key] = loader()
-    CACHE.set(object, cache)
+    cache[key] = loader();
+    CACHE.set(object, cache);
   }
-  return cache[key]
+  return cache[key];
 }
 
 class SlackDevKit {
-
   /**
    * Creates an instance of Slack DevKit
-   * 
+   *
    * @param {string} [settings.client_id] Slack client id
    * @param {string} [settings.client_secret] Slack client secret
    * @param {string} [settings.signing_secret] Slack signing secret
@@ -26,42 +25,42 @@ class SlackDevKit {
    * @memberof SlackDevKit
    */
   constructor(settings) {
-    this.settings = settings
-    CACHE.set(this, {})
+    this.settings = settings;
+    CACHE.set(this, {});
   }
 
   get router() {
     return lazyLoad(this, 'router', () => {
-      return require('./server/router')
-    })
+      return require('./server/router');
+    });
   }
 
   get client() {
     return lazyLoad(this, 'client', () => {
-      return require('./core/client')
-    })
+      return require('./core/client');
+    });
   }
 
   get app() {
     return lazyLoad(this, 'app', () => {
-      const App = require('./core/app')
-      return new App(this.settings)
-    })
+      const App = require('./core/app');
+      return new App(this.settings);
+    });
   }
 
   get server() {
     return lazyLoad(this, 'server', () => {
-      const Server = require('./server/express')
-      return new Server(this.settings)
-    })
+      const Server = require('./server/express');
+      return new Server(this.settings);
+    });
   }
 
   get lambda() {
     return lazyLoad(this, 'lambda', () => {
-      const Lambda = require('./server/lambda')
-      return new Lambda(this.settings)
-    })
+      const Lambda = require('./server/lambda');
+      return new Lambda(this.settings);
+    });
   }
 }
 
-module.exports = SlackDevKit
+module.exports = SlackDevKit;

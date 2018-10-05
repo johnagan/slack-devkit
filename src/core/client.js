@@ -1,7 +1,6 @@
-const
-  qs = require('querystring'),
+const qs = require('querystring'),
   https = require('https'),
-  url = require('url')
+  url = require('url');
 
 /**
  * Submit a GET request
@@ -12,10 +11,9 @@ const
  * @returns {Promise} the GET response
  */
 exports.get = function(uri = '', data = {}, headers = {}) {
-  const query = uri + '?' + qs.stringify(data)
-  return this.request(query, '', headers, 'GET')
-}
-
+  const query = uri + '?' + qs.stringify(data);
+  return this.request(query, '', headers, 'GET');
+};
 
 /**
  * Submit a POST request
@@ -27,13 +25,12 @@ exports.get = function(uri = '', data = {}, headers = {}) {
  * @returns {Promise} the POST response
  */
 exports.post = function(uri = '', data = {}, headers = {}, isJSON = false) {
-  const encoder = isJSON ? JSON : qs
-  const body = encoder.stringify(data)
-  const contentType = isJSON ? 'json; charset=utf-8' : 'x-www-form-urlencoded'
-  headers['Content-Type'] = `application/${contentType}`
-  return this.request(uri, body, headers)
-}
-
+  const encoder = isJSON ? JSON : qs;
+  const body = encoder.stringify(data);
+  const contentType = isJSON ? 'json; charset=utf-8' : 'x-www-form-urlencoded';
+  headers['Content-Type'] = `application/${contentType}`;
+  return this.request(uri, body, headers);
+};
 
 /**
  * Upload a file to Slack
@@ -45,29 +42,35 @@ exports.post = function(uri = '', data = {}, headers = {}, isJSON = false) {
  * @returns {Promise} the POST response
  */
 exports.upload = function(uri = '', data = {}, filename = '', headers = {}) {
-  const boundary = 'xxxxxxxxxx'
-  const delimeter = Buffer.from(`--${boundary}\r\n`, "utf8")
+  const boundary = 'xxxxxxxxxx';
+  const delimeter = Buffer.from(`--${boundary}\r\n`, 'utf8');
 
-  const payload = Object.keys(data).reduce((body, key) => {
-    const append = text => body.push(Buffer.from(text + '\r\n', "utf8"))
-    let value = data[key]
+  const payload = Object.keys(data).reduce(
+    (body, key) => {
+      const append = text => body.push(Buffer.from(text + '\r\n', 'utf8'));
+      let value = data[key];
 
-    if (Buffer.isBuffer(value)) {
-      append(`Content-Disposition: form-data; name="${key}"; filename="${filename}";`)
-      append(`Content-Type: application/octet-stream\r\n`)
-      body.push(value)
-      append("")
-    } else {
-      append(`Content-Disposition: form-data; name="${key}";\r\n\r\n${value}`)
-    }
+      if (Buffer.isBuffer(value)) {
+        append(
+          `Content-Disposition: form-data; name="${key}"; filename="${filename}";`
+        );
+        append(`Content-Type: application/octet-stream\r\n`);
+        body.push(value);
+        append('');
+      } else {
+        append(
+          `Content-Disposition: form-data; name="${key}";\r\n\r\n${value}`
+        );
+      }
 
-    return body.concat([delimeter])
-  }, [delimeter])
+      return body.concat([delimeter]);
+    },
+    [delimeter]
+  );
 
-  headers['Content-Type'] = `multipart/form-data; boundary=${boundary}`
-  return this.request(uri, Buffer.concat(payload), headers)
-}
-
+  headers['Content-Type'] = `multipart/form-data; boundary=${boundary}`;
+  return this.request(uri, Buffer.concat(payload), headers);
+};
 
 /**
  * Submit an HTTP request
@@ -79,35 +82,32 @@ exports.upload = function(uri = '', data = {}, filename = '', headers = {}) {
  * @returns {Promise} the HTTP response
  */
 exports.request = function(uri = '', body = '', headers = {}, method = 'POST') {
-  headers['Content-Length'] = Buffer.byteLength(body)
-  headers['User-Agent'] = 'slack-devkit'
+  headers['Content-Length'] = Buffer.byteLength(body);
+  headers['User-Agent'] = 'slack-devkit';
 
-  const { protocol, hostname, path } = url.parse(uri)
-  const options = { protocol, hostname, path, headers, method }
+  const { protocol, hostname, path } = url.parse(uri);
+  const options = { protocol, hostname, path, headers, method };
 
   return new Promise((resolve, reject) => {
     const request = https.request(options, response => {
-      let data = []
-      const { headers } = response
-      response.on('data', chunk => data.push(chunk))
+      let data = [];
+      const { headers } = response;
+      response.on('data', chunk => data.push(chunk));
       response.on('end', () => {
-
         // join data based on content type
         if (data.length > 0 && Buffer.isBuffer(data[0]))
-          data = Buffer.concat(data)
-        else
-          data = data.join('')
+          data = Buffer.concat(data);
+        else data = data.join('');
 
         // parse if response is JSON
-        if (/json/.test(headers['content-type']))
-          data = JSON.parse(data)
+        if (/json/.test(headers['content-type'])) data = JSON.parse(data);
 
-        return resolve({ data, options, headers, request, body })
-      })
-    })
+        return resolve({ data, options, headers, request, body });
+      });
+    });
 
-    request.on('error', err => reject(err))
-    request.write(body)
-    request.end()
-  })
-}
+    request.on('error', err => reject(err));
+    request.write(body);
+    request.end();
+  });
+};

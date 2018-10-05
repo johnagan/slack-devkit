@@ -1,8 +1,6 @@
-const
-  client = require('./client'),
+const client = require('./client'),
   qs = require('querystring'),
-  crypto = require('crypto')
-
+  crypto = require('crypto');
 
 /**
  * Slack App
@@ -10,10 +8,9 @@ const
  * @class App
  */
 class App {
-
   /**
    * Creates an instance of App
-   * 
+   *
    * @param {string} [settings.client_id] Slack client id
    * @param {string} [settings.client_secret] Slack client secret
    * @param {string} [settings.signing_secret] Slack signing secret
@@ -26,9 +23,8 @@ class App {
    * @memberof App
    */
   constructor(settings = {}) {
-    Object.assign(this, settings)
+    Object.assign(this, settings);
   }
-
 
   /**
    * The root url for Slack
@@ -38,10 +34,9 @@ class App {
    * @memberof App
    */
   get root_url() {
-    let slack_root = this.slack_root || 'slack.com'
-    return `https://${slack_root}`
+    let slack_root = this.slack_root || 'slack.com';
+    return `https://${slack_root}`;
   }
-
 
   /**
    * Generate URL for Add to Slack
@@ -52,34 +47,38 @@ class App {
    * @memberof App
    */
   getAuthUrl(query = {}) {
-    const { state, single_channel } = query
-    const { root_url, client_id, scope, redirect_uri } = this
-    const params = qs.stringify({ client_id, scope, state, single_channel, redirect_uri })
-    return `${root_url}/oauth/authorize?${params}`
+    const { state, single_channel } = query;
+    const { root_url, client_id, scope, redirect_uri } = this;
+    const params = qs.stringify({
+      client_id,
+      scope,
+      state,
+      single_channel,
+      redirect_uri
+    });
+    return `${root_url}/oauth/authorize?${params}`;
   }
-
 
   /**
    * Verifies the request timestamp
-   * 
+   *
    * @param {string} timestamp The request signature timestamp
    * @returns {boolean} Is verified
    * @memberof App
    */
   verifyTimestamp(timestamp) {
-    if (timestamp === undefined) return false
+    if (timestamp === undefined) return false;
 
-    const time = parseInt(timestamp)
-    const now = Math.floor(new Date().getTime() / 1000)
+    const time = parseInt(timestamp);
+    const now = Math.floor(new Date().getTime() / 1000);
 
     // Check if the timestamp is more than five minutes from local time
-    return Math.abs(now - time) <= (60 * 5)
+    return Math.abs(now - time) <= 60 * 5;
   }
-
 
   /**
    * Verifies the request signature
-   * 
+   *
    * @param {string} signature The request signature
    * @param {string} timestamp The request signature timestamp
    * @param {string} body The request body
@@ -87,31 +86,29 @@ class App {
    * @memberof App
    */
   verifySignature(signature, timestamp, body) {
-    if (this.signing_secret === undefined) return true // not set
-    if (signature === undefined) return false // not passed in
+    if (this.signing_secret === undefined) return true; // not set
+    if (signature === undefined) return false; // not passed in
 
-    const hmac = crypto.createHmac('sha256', this.signing_secret)
-    const [version, hash] = signature.split('=')
+    const hmac = crypto.createHmac('sha256', this.signing_secret);
+    const [version, hash] = signature.split('=');
 
-    hmac.update(`${version}:${timestamp}:${body}`)
-    const validHash = hmac.digest('hex')
+    hmac.update(`${version}:${timestamp}:${body}`);
+    const validHash = hmac.digest('hex');
 
-    return hash === validHash
+    return hash === validHash;
   }
-
 
   /**
    * Verifies the request token
-   * 
+   *
    * @param {string} token The request verification token
    * @returns {boolean} Is verified
    * @memberof App
    */
   verifyToken(token) {
-    const { verification_token } = this
-    return (verification_token === undefined || token === verification_token)
+    const { verification_token } = this;
+    return verification_token === undefined || token === verification_token;
   }
-
 
   /**
    * Completes the authentication
@@ -121,11 +118,10 @@ class App {
    * @memberof App
    */
   authenticate(code) {
-    const { client_id, client_secret, scope, redirect_uri } = this
-    const params = { code, scope, client_id, client_secret, redirect_uri }
-    return this.api('oauth.access', params)
+    const { client_id, client_secret, scope, redirect_uri } = this;
+    const params = { code, scope, client_id, client_secret, redirect_uri };
+    return this.api('oauth.access', params);
   }
-
 
   /**
    * Refresh the access token
@@ -135,21 +131,25 @@ class App {
    * @memberof App
    */
   refreshToken(data) {
-    const { refresh_token, team_id } = data
-    const { client_id, client_secret } = this
-    const params = { grant_type: 'refresh_token', refresh_token, client_id, client_secret }
+    const { refresh_token, team_id } = data;
+    const { client_id, client_secret } = this;
+    const params = {
+      grant_type: 'refresh_token',
+      refresh_token,
+      client_id,
+      client_secret
+    };
 
     // update saved access token
     const update = r => {
-      const updated_data = Object.assign({}, data, r.data)
-      return this.datastore.save(team_id, updated_data)
-    }
+      const updated_data = Object.assign({}, data, r.data);
+      return this.datastore.save(team_id, updated_data);
+    };
 
     // if refresh token is present, attempt to update the access token
-    if (refresh_token === undefined) return Promise.resolve(access)
-    return this.api('oauth.access', params).then(update)
+    if (refresh_token === undefined) return Promise.resolve(access);
+    return this.api('oauth.access', params).then(update);
   }
-
 
   /**
    * Submit an authenticated POST request to Slack
@@ -161,37 +161,37 @@ class App {
    * @memberof App
    */
   api(endPoint = '', data = {}, headers = {}) {
-    const { root_url, access_token, single_channel_id } = this
-    const { attachments, dialog, unfurl, token, channel, file } = data
-    const isWebHook = endPoint.startsWith('https://hooks.slack.com')
-    const isJSON = (attachments || dialog || unfurl || isWebHook)
+    const { root_url, access_token, single_channel_id } = this;
+    const { attachments, dialog, unfurl, token, channel, file } = data;
+    const isWebHook = endPoint.startsWith('https://hooks.slack.com');
+    const isJSON = attachments || dialog || unfurl || isWebHook;
 
     // append base URL when an endpoint is passed in
-    if (!/^http/i.test(endPoint))
-      endPoint = `${root_url}/api/${endPoint}`
+    if (!/^http/i.test(endPoint)) endPoint = `${root_url}/api/${endPoint}`;
 
     // override token when passed in from app settings (single workspace)
     if (token === undefined && access_token !== undefined)
-      data.token = access_token
+      data.token = access_token;
 
     // append the channel_id for single-channel apps (incoming webhooks)
     if (channel === undefined && single_channel_id !== undefined)
-      data.channel = single_channel_id
+      data.channel = single_channel_id;
 
     // append token to header
     if (isJSON && !isWebHook && data.token !== undefined)
-      headers['Authorization'] = `Bearer ${data.token}`
+      headers.Authorization = `Bearer ${data.token}`;
 
     const callback = r => {
-      const successful = r.data.ok === undefined || r.data.ok === true
-      return successful ? Promise.resolve(r) : Promise.reject(r)
-    }
+      const successful = r.data.ok === undefined || r.data.ok === true;
+      return successful ? Promise.resolve(r) : Promise.reject(r);
+    };
 
     if (file !== undefined) {
-      return client.upload(endPoint, data, data.filename, headers).then(callback)
-    } else
-      return client.post(endPoint, data, headers, isJSON).then(callback)
+      return client
+        .upload(endPoint, data, data.filename, headers)
+        .then(callback);
+    } else return client.post(endPoint, data, headers, isJSON).then(callback);
   }
 }
 
-module.exports = App
+module.exports = App;
