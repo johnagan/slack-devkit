@@ -50,8 +50,8 @@ export = class DynamoDB {
     params.TableName = this.tableName;
 
     return new Promise((resolve: Function, reject: Function) => {
-      this.dynamo[method](params, (err: any) => {
-        err ? reject(err) : resolve(params.Item);
+      this.dynamo[method](params, (err: any, data: any) => {
+        err ? reject(err) : resolve(data);
       });
     });
   }
