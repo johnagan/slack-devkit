@@ -37,7 +37,7 @@ module.exports = function(settings) {
     if (!valid) return res.sendStatus(401);
 
     // Events API challenge request
-    if (challenge) return res.setHeader('Content-Type', 'text/plain').send(challenge)
+    if (challenge) return res.setHeader('Content-Type', 'text/plain').send(challenge);
 
     // Load workspace data and continue
     return req.slack.load().then(done);
